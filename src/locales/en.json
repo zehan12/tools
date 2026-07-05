@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "Developer Tools",
+    "description": "A collection of useful developer tools that run entirely in your browser. Your data never leaves your device.",
+    "viewOnGithub": "View on GitHub",
+    "searchPlaceholder": "Search tools...",
+    "noResults": "No results found.",
+    "searchTools": "Search tools",
+    "clearData": "Clear saved data",
+    "skipToContent": "Skip to main content"
+  },
+  "sidebar": {
+    "by": "by",
+    "themeToggle": "Toggle theme",
+    "languageToggle": "Switch language"
+  },
+  "categories": {
+    "Cryptography": "Cryptography",
+    "Encoding": "Encoding",
+    "Network": "Network",
+    "Math": "Math",
+    "Formatting": "Formatting",
+    "Security": "Security",
+    "Colors": "Colors",
+    "Time": "Time",
+    "Finance": "Finance",
+    "Misc": "Misc"
+  },
+  "tools": {
+    "base64": {
+      "title": "Base64 Decoder",
+      "description": "Decode Base64 encoded strings quickly and easily in your browser."
+    },
+    "base64-encode": {
+      "title": "Base64 Encoder",
+      "description": "Encode strings to Base64 format quickly and easily in your browser."
+    },
+    "jwt": {
+      "title": "JWT Decoder / Encoder",
+      "description": "Decode, inspect, and encode JSON Web Tokens (JWT) to view their header, payload, and signature."
+    },
+    "color": {
+      "title": "Color Converter",
+      "description": "Convert colors between different formats (HEX, RGB, HSL, etc.) with a live preview."
+    },
+    "color-compare": {
+      "title": "Color Compare",
+      "description": "Compare two colors side by side with live swatches and normalized output."
+    },
+    "hmac": {
+      "title": "HMAC Generator",
+      "description": "Generate a Hash-based Message Authentication Code (HMAC) to verify message integrity and authenticity using your secret key."
+    },
+    "secrets": {
+      "title": "Secret Generator",
+      "description": "Generate cryptographically secure secrets and passwords with configurable length and special characters."
+    },
+    "diff": {
+      "title": "Text Diff",
+      "description": "Compare two texts and see their differences highlighted, with support for character, word, and line-based diffing."
+    },
+    "word-counter": {
+      "title": "Word Counter",
+      "description": "Count characters, words, sentences, and paragraphs in your text with real-time statistics."
+    },
+    "sql-formatter": {
+      "title": "SQL Formatter",
+      "description": "Format and beautify SQL queries with syntax highlighting."
+    },
+    "json-formatter": {
+      "title": "JSON Formatter",
+      "description": "Format and prettify your JSON data instantly in your browser."
+    },
+    "qr-code": {
+      "title": "QR Code Generator",
+      "description": "Generate QR codes from text, URLs, or any data directly in your browser."
+    },
+    "notification-tester": {
+      "title": "Notification Tester",
+      "description": "Test browser notifications with permission handling and delayed notifications."
+    },
+    "secret-sharing": {
+      "title": "Secret Sharing",
+      "description": "Encrypt a secret with a password and share it via a URL. Decrypts in the browser."
+    },
+    "dns-records": {
+      "title": "DNS Records",
+      "description": "Look up DNS records for any domain using Google's public DNS service."
+    },
+    "timezone-converter": {
+      "title": "Timezone Converter",
+      "description": "Convert times between different timezones. Supports timestamps, ISO dates, and custom formats."
+    },
+    "india-income-tax": {
+      "title": "Income Tax Calculator",
+      "description": "Calculate income tax for India's new tax regime (FY 2025-26) with detailed breakdown by slab, cess, and surcharge."
+    },
+    "bounty-calculator": {
+      "title": "Bounty Calculator",
+      "description": "Suggest a bug bounty payout from a CVSS vector string using tier-based interpolation and component kickers."
+    },
+    "cvss-calculator": {
+      "title": "CVSS Calculator",
+      "description": "Build a CVSS v3.1 vector by picking each metric, see the live base score and severity, and copy or share the result."
+    }
+  },
+  "common": {
+    "errorEncoding": "Error encoding input",
+    "inputText": "Input Text",
+    "typeTextToEncode": "Type text to encode...",
+    "base64Output": "Base64 Output"
+  }
+}

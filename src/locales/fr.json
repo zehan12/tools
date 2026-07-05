@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "Outils de Développement",
+    "description": "Une collection d'outils de développement utiles qui s'exécutent entièrement dans votre navigateur. Vos données ne quittent jamais votre appareil.",
+    "viewOnGithub": "Voir sur GitHub",
+    "searchPlaceholder": "Rechercher des outils...",
+    "noResults": "Aucun résultat trouvé.",
+    "searchTools": "Outils de recherche",
+    "clearData": "Effacer les données sauvegardées",
+    "skipToContent": "Passer au contenu principal"
+  },
+  "sidebar": {
+    "by": "par",
+    "themeToggle": "Changer de thème",
+    "languageToggle": "Changer de langue"
+  },
+  "categories": {
+    "Cryptography": "Cryptographie",
+    "Encoding": "Encodage",
+    "Network": "Réseau",
+    "Math": "Mathématiques",
+    "Formatting": "Formatage",
+    "Security": "Sécurité",
+    "Colors": "Couleurs",
+    "Time": "Temps",
+    "Finance": "Finances",
+    "Misc": "Divers"
+  },
+  "tools": {
+    "base64": {
+      "title": "Décodeur Base64",
+      "description": "Décodez les chaînes codées en Base64 rapidement et facilement dans votre navigateur."
+    },
+    "base64-encode": {
+      "title": "Encodeur Base64",
+      "description": "Encodez des chaînes au format Base64 rapidement et facilement dans votre navigateur."
+    },
+    "jwt": {
+      "title": "Décodeur / Encodeur JWT",
+      "description": "Décodez, inspectez et encodez des JSON Web Tokens (JWT) pour afficher leur en-tête, leur charge utile et leur signature."
+    },
+    "color": {
+      "title": "Convertisseur de Couleurs",
+      "description": "Convertissez des couleurs entre différents formats avec un aperçu en direct."
+    },
+    "color-compare": {
+      "title": "Comparer Couleurs",
+      "description": "Comparez deux couleurs côte à côte avec des échantillons en direct."
+    },
+    "hmac": {
+      "title": "Générateur HMAC",
+      "description": "Générez un HMAC pour vérifier l'intégrité du message."
+    },
+    "secrets": {
+      "title": "Générateur de Secrets",
+      "description": "Générez des mots de passe sécurisés et des secrets configurables."
+    },
+    "diff": {
+      "title": "Différence de Texte",
+      "description": "Comparez deux textes et voyez leurs différences en surbrillance."
+    },
+    "word-counter": {
+      "title": "Compteur de Mots",
+      "description": "Comptez les caractères, les mots, les phrases et les paragraphes."
+    },
+    "sql-formatter": {
+      "title": "Formateur SQL",
+      "description": "Formatez et embellissez les requêtes SQL."
+    },
+    "json-formatter": {
+      "title": "Formateur JSON",
+      "description": "Formatez des données JSON instantanément."
+    },
+    "qr-code": {
+      "title": "Générateur de Code QR",
+      "description": "Générez des codes QR à partir de texte, d'URL ou de données."
+    },
+    "notification-tester": {
+      "title": "Testeur de Notifications",
+      "description": "Testez les notifications du navigateur."
+    },
+    "secret-sharing": {
+      "title": "Partage de Secret",
+      "description": "Chiffrez un secret et partagez-le par URL."
+    },
+    "dns-records": {
+      "title": "Enregistrements DNS",
+      "description": "Recherchez les enregistrements DNS de n'importe quel domaine."
+    },
+    "timezone-converter": {
+      "title": "Convertisseur de Fuseau Horaire",
+      "description": "Convertissez les heures entre différents fuseaux horaires."
+    },
+    "india-income-tax": {
+      "title": "Calculateur d'Impôt (Inde)",
+      "description": "Calculez l'impôt sur le revenu pour l'Inde."
+    },
+    "bounty-calculator": {
+      "title": "Calculateur de Prime",
+      "description": "Suggère un paiement de prime de bug basé sur CVSS."
+    },
+    "cvss-calculator": {
+      "title": "Calculateur CVSS",
+      "description": "Construisez un vecteur CVSS v3.1 et voyez la gravité en direct."
+    }
+  },
+  "common": {
+    "errorEncoding": "Erreur d'encodage de l'entrée",
+    "inputText": "Texte d'entrée",
+    "typeTextToEncode": "Tapez le texte à encoder...",
+    "base64Output": "Sortie Base64"
+  }
+}

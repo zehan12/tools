@@ -3,10 +3,12 @@ import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, C
 import { Icon } from "@iconify/react"
 import { useNavigate } from "react-router-dom"
 import { tools } from "@/tools"
+import { useTranslation } from "react-i18next"
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -21,10 +23,10 @@ export function CommandPalette() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search tools..." />
+      <CommandInput placeholder={t('app.searchPlaceholder')} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Tools">
+        <CommandEmpty>{t('app.noResults')}</CommandEmpty>
+        <CommandGroup heading={t('app.searchTools')}>
           {tools.map((tool) => (
             <CommandItem
               key={tool.slug}
@@ -34,7 +36,7 @@ export function CommandPalette() {
               }}
             >
               <Icon aria-hidden="true" icon={tool.icon || "carbon:tool"} className="mr-2 h-4 w-4" />
-              <span>{tool.title}</span>
+              <span>{t(`tools.${tool.slug}.title`, tool.title)}</span>
             </CommandItem>
           ))}
         </CommandGroup>

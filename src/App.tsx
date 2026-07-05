@@ -6,17 +6,18 @@ import { Icon } from "@iconify/react"
 import { Link } from "react-router-dom"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SEO } from "@/components/SEO"
+import { useTranslation } from "react-i18next"
 
 function Home() {
+  const { t } = useTranslation()
   return (
     <div className="w-full">
       <SEO />
       <div className="space-y-6">
         <div className="space-y-2">
-          <h1 className="text-xl font-medium tracking-wider dark:text-gray-100">Developer Tools</h1>
+          <h1 className="text-xl font-medium tracking-wider dark:text-gray-100">{t('app.title')}</h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-xl mt-2">
-            A collection of useful developer tools that run entirely in your
-            browser. Your data never leaves your device.
+            {t('app.description')}
           </p>
         </div>
 
@@ -28,11 +29,11 @@ function Home() {
               className="group block space-y-2 p-4 outline outline-border hover:outline-ring/50 hover:bg-muted/30 transition-all"
             >
               <div className="flex items-center justify-between">
-                <h2 className="font-semibold text-foreground">{tool.title}</h2>
+                <h2 className="font-semibold text-foreground">{t(`tools.${tool.slug}.title`, tool.title)}</h2>
                 <Icon aria-hidden="true" icon="ph:arrow-right" className="size-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {tool.description}
+                {t(`tools.${tool.slug}.description`, tool.description)}
               </p>
             </Link>
           ))}
@@ -46,7 +47,7 @@ function Home() {
             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2"
           >
             <Icon aria-hidden="true" icon="ph:github-logo" className="size-4" />
-            View on GitHub
+            {t('app.viewOnGithub')}
           </a>
         </div>
       </div>

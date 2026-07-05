@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "Herramientas para Desarrolladores",
+    "description": "Una colección de herramientas útiles para desarrolladores que se ejecutan completamente en su navegador. Sus datos nunca salen de su dispositivo.",
+    "viewOnGithub": "Ver en GitHub",
+    "searchPlaceholder": "Buscar herramientas...",
+    "noResults": "No se encontraron resultados.",
+    "searchTools": "Buscar herramientas",
+    "clearData": "Borrar datos guardados",
+    "skipToContent": "Saltar al contenido principal"
+  },
+  "sidebar": {
+    "by": "por",
+    "themeToggle": "Cambiar tema",
+    "languageToggle": "Cambiar idioma"
+  },
+  "categories": {
+    "Cryptography": "Criptografía",
+    "Encoding": "Codificación",
+    "Network": "Red",
+    "Math": "Matemáticas",
+    "Formatting": "Formato",
+    "Security": "Seguridad",
+    "Colors": "Colores",
+    "Time": "Tiempo",
+    "Finance": "Finanzas",
+    "Misc": "Varios"
+  },
+  "tools": {
+    "base64": {
+      "title": "Decodificador Base64",
+      "description": "Decodifica cadenas codificadas en Base64 de forma rápida y sencilla en tu navegador."
+    },
+    "base64-encode": {
+      "title": "Codificador Base64",
+      "description": "Codifica cadenas a formato Base64 de forma rápida y sencilla en tu navegador."
+    },
+    "jwt": {
+      "title": "Decodificador / Codificador JWT",
+      "description": "Decodifica, inspecciona y codifica JSON Web Tokens (JWT) para ver su encabezado, carga útil y firma."
+    },
+    "color": {
+      "title": "Convertidor de Color",
+      "description": "Convierte colores entre diferentes formatos con una vista previa en vivo."
+    },
+    "color-compare": {
+      "title": "Comparar Color",
+      "description": "Compara dos colores lado a lado con muestras en vivo."
+    },
+    "hmac": {
+      "title": "Generador HMAC",
+      "description": "Genera un HMAC para verificar la integridad del mensaje."
+    },
+    "secrets": {
+      "title": "Generador de Secretos",
+      "description": "Genera contraseñas seguras y secretos configurables."
+    },
+    "diff": {
+      "title": "Diferencia de Texto",
+      "description": "Compara dos textos y ve sus diferencias resaltadas."
+    },
+    "word-counter": {
+      "title": "Contador de Palabras",
+      "description": "Cuenta caracteres, palabras, oraciones y párrafos."
+    },
+    "sql-formatter": {
+      "title": "Formateador SQL",
+      "description": "Formatea y embellece consultas SQL."
+    },
+    "json-formatter": {
+      "title": "Formateador JSON",
+      "description": "Formatea datos JSON al instante."
+    },
+    "qr-code": {
+      "title": "Generador de Código QR",
+      "description": "Genera códigos QR desde texto, URLs o cualquier dato."
+    },
+    "notification-tester": {
+      "title": "Prueba de Notificaciones",
+      "description": "Prueba notificaciones de navegador."
+    },
+    "secret-sharing": {
+      "title": "Compartir Secreto",
+      "description": "Cifra un secreto y compártelo por URL."
+    },
+    "dns-records": {
+      "title": "Registros DNS",
+      "description": "Busca registros DNS para cualquier dominio."
+    },
+    "timezone-converter": {
+      "title": "Convertidor de Zona Horaria",
+      "description": "Convierte horas entre diferentes zonas horarias."
+    },
+    "india-income-tax": {
+      "title": "Calculadora de Impuestos (India)",
+      "description": "Calcula el impuesto sobre la renta para India."
+    },
+    "bounty-calculator": {
+      "title": "Calculadora de Recompensa",
+      "description": "Sugiere pago de bug bounty basado en CVSS."
+    },
+    "cvss-calculator": {
+      "title": "Calculadora CVSS",
+      "description": "Construye un vector CVSS v3.1 y ve la severidad en vivo."
+    }
+  },
+  "common": {
+    "errorEncoding": "Error al codificar entrada",
+    "inputText": "Texto de entrada",
+    "typeTextToEncode": "Escribe el texto a codificar...",
+    "base64Output": "Salida Base64"
+  }
+}

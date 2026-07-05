@@ -2,15 +2,24 @@ import { Link, useLocation } from "react-router-dom"
 import { useTheme } from "@/components/theme-provider"
 import { tools, Category } from "@/tools"
 import { Icon } from "@iconify/react"
+import { useTranslation } from "react-i18next"
 
 export function Sidebar() {
   const location = useLocation()
   const { theme, setTheme } = useTheme()
+  const { t, i18n } = useTranslation()
 
   const categories = Object.values(Category).map(category => ({
     name: category.charAt(0).toUpperCase() + category.slice(1),
     tools: tools.filter(t => t.category === category)
   })).filter(c => c.tools.length > 0)
+
+  const toggleLanguage = () => {
+    const langs = ['en', 'es', 'fr']
+    const currentIndex = langs.indexOf(i18n.resolvedLanguage || 'en')
+    const nextIndex = (currentIndex + 1) % langs.length
+    i18n.changeLanguage(langs[nextIndex])
+  }
 
   return (
     <aside className="sticky top-0 hidden sm:grid h-screen p-3 pr-0 basis-72 lg:basis-80">
@@ -19,16 +28,25 @@ export function Sidebar() {
           <Link to="/" className="text-xl font-medium uppercase tracking-wider text-gray-900 dark:text-gray-100">
             Tools
           </Link>
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-            aria-label="Toggle theme"
-          >
-            <Icon icon={theme === 'dark' ? 'ph:sun' : 'ph:moon'} className="size-5" />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={toggleLanguage}
+              className="p-1.5 text-xs font-bold text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors uppercase"
+              aria-label={t('sidebar.languageToggle')}
+            >
+              {i18n.resolvedLanguage || 'en'}
+            </button>
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              aria-label={t('sidebar.themeToggle')}
+            >
+              <Icon icon={theme === 'dark' ? 'ph:sun' : 'ph:moon'} className="size-5" />
+            </button>
+          </div>
         </div>
         <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 shrink-0">
-          <span>by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
+          <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
           <span>•</span>
           <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="/llm.txt">llm.txt</a>
         </div>
@@ -38,11 +56,11 @@ export function Sidebar() {
             document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))
           }}
           className="group flex items-center justify-between w-full px-2 py-1.5 mb-4 text-sm text-muted-foreground bg-muted/30 outline outline-border hover:bg-muted/50 transition-colors shrink-0"
-          aria-label="Search tools"
+          aria-label={t('app.searchTools')}
         >
           <span className="flex items-center gap-2">
             <Icon icon="ph:magnifying-glass" className="size-4" />
-            Search...
+            {t('app.searchPlaceholder')}
           </span>
           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 bg-muted/50 outline outline-border px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
             <span className="text-xs">⌘</span>K
@@ -52,7 +70,7 @@ export function Sidebar() {
           {categories.map(category => (
             <div key={category.name} className="space-y-1">
               <h3 className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-1">
-                {category.name}
+                {t(`categories.${category.name}`, category.name)}
               </h3>
               <div className="-mx-2 space-y-0.5">
                 {category.tools.map(tool => {
