@@ -1,4 +1,5 @@
 import type { ReactNode } from "react"
+import { SEO } from "./SEO"
 
 interface ToolLayoutProps {
   title: string
@@ -11,6 +12,7 @@ interface ToolLayoutProps {
 export function ToolLayout({ title, description, children, onClear, maxWidth = "w-full" }: ToolLayoutProps) {
   return (
     <div className={`${maxWidth} flex flex-col grow gap-6 justify-between`}>
+      <SEO title={title} description={description} />
       <section className="space-y-6 grow flex flex-col">
         <div>
           <h1 className="text-xl font-medium tracking-wider truncate">

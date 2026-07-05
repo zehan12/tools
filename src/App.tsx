@@ -5,10 +5,12 @@ import { tools } from "@/tools"
 import { Icon } from "@iconify/react"
 import { Link } from "react-router-dom"
 import { ThemeProvider } from "@/components/theme-provider"
+import { SEO } from "@/components/SEO"
 
 function Home() {
   return (
     <div className="w-full">
+      <SEO />
       <div className="space-y-6">
         <div className="space-y-2">
           <h1 className="text-xl font-medium tracking-wider dark:text-gray-100">Developer Tools</h1>
