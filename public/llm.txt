@@ -1,0 +1,32 @@
+# Developer Tools Suite
+
+This is a comprehensive, client-side web application providing a suite of developer, security, and utility tools. It is designed with a high-contrast, brutalist aesthetic.
+
+## Tech Stack
+- **Framework:** React 19 with Vite
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Components:** Radix UI primitives / shadcn/ui
+- **Icons:** Lucide React
+- **Routing:** React Router v7
+- **Package Manager:** Bun
+
+## Architecture & Design Principles
+- **Client-Side First:** All tools operate entirely in the browser (client-side) using Web APIs (e.g., WebCrypto API for HMAC and JWT) ensuring data privacy and offline capability. No external API calls are made unless absolutely necessary for the tool's core function.
+- **Brutalist Aesthetic:** The UI strictly adheres to a brutalist, minimal-polish design. We prioritize high contrast, sharp edges (no rounding), monochromatic palettes (mostly black, white, and grays), visible borders (`outline-border`), and monospaced typography (`font-mono`) where appropriate.
+- **State Management:** Persistent state is managed via custom hooks (e.g., `usePersist`) that sync tool inputs and preferences to `localStorage`, allowing users to resume their work seamlessly.
+- **Modularity:** Tools are contained entirely within their own page components (in `src/pages/`) and registered centrally in `src/tools.ts`.
+
+## Project Structure
+- `/src/pages/` - Contains the individual tool implementations (e.g., `jwt.tsx`, `base64.tsx`, `cvss-calculator.tsx`).
+- `/src/components/` - Shared UI components and application shells (`Sidebar.tsx`, `CommandPalette.tsx`, `ToolLayout.tsx`).
+- `/src/components/ui/` - Granular, reusable building blocks created with shadcn/ui.
+- `/src/hooks/` - Custom React hooks.
+- `/src/tools.ts` - Central registry mapping tool names to categories, descriptions, routes, and icons.
+
+## Adding a New Tool
+To add a new tool to the suite:
+1. Create a new component in `/src/pages/<tool-name>.tsx`.
+2. Wrap the interface with the `<ToolLayout>` component, providing `title` and `description` props.
+3. Add the tool to the `tools` array in `/src/tools.ts` with its respective category and metadata.
+4. Add the routing definition in `/src/App.tsx`.

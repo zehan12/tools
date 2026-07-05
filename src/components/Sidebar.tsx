@@ -26,9 +26,11 @@ export function Sidebar() {
             <Icon icon={theme === 'dark' ? 'ph:sun' : 'ph:moon'} className="size-5" />
           </button>
         </div>
-        <span className="text-xs tracking-wide text-gray-600 mb-4 shrink-0">
-          by <a className="underline" target="_blank" href="https://zehan">zehan</a>
-        </span>
+        <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 shrink-0">
+          <span>by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
+          <span>•</span>
+          <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="/llm.txt">llm.txt</a>
+        </div>
 
         <button
           onClick={() => {
