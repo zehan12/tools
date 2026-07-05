@@ -59,10 +59,13 @@ export function Sidebar() {
             </button>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 mt-2 shrink-0">
-          <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
-          <span>•</span>
-          <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="/llm.txt">llm.txt</a>
+        <div className="flex flex-col gap-1 text-xs tracking-wide text-gray-600 mb-4 mt-2 shrink-0">
+          <div className="flex items-center gap-2">
+            <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
+            <span>•</span>
+            <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="/llm.txt">llm.txt</a>
+          </div>
+          <span className="text-[10px] text-gray-400 dark:text-gray-500">Inspired by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" rel="noopener noreferrer" href="https://tools-shivam-dev.vercel.app/">shivam.dev</a></span>
         </div>
 
         <button
