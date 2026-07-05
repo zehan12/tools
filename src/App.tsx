@@ -1,11 +1,11 @@
 import { Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Layout } from "@/components/Layout"
+import { Layout } from "@/components/layout/Layout"
 import { tools } from "@/tools"
 import { Icon } from "@iconify/react"
 import { Link } from "react-router-dom"
-import { ThemeProvider } from "@/components/theme-provider"
-import { SEO } from "@/components/SEO"
+import { ThemeProvider } from "@/components/providers/theme-provider"
+import { SEO } from "@/components/common/SEO"
 import { useTranslation } from "react-i18next"
 
 function Home() {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ToolLayout } from "@/components/ToolLayout"
+import { ToolLayout } from "@/components/common/ToolLayout"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 

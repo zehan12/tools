@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ToolLayout } from "@/components/ToolLayout"
+import { ToolLayout } from "@/components/common/ToolLayout"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"

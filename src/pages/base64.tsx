@@ -1,4 +1,4 @@
-import { ToolLayout } from "@/components/ToolLayout"
+import { ToolLayout } from "@/components/common/ToolLayout"
 import { usePersist } from "@/hooks/use-persist"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
