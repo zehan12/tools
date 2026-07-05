@@ -102,7 +102,7 @@ export function Sidebar() {
           ))}
         </nav>
         <div className="mt-4 pt-4 border-t border-border shrink-0">
-          <span className="text-[10px] text-gray-400 dark:text-gray-500 block text-center">Inspired by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" rel="noopener noreferrer" href="https://tools-shivam-dev.vercel.app/">shivam.dev</a></span>
+          <span className="text-[9px] opacity-70 text-gray-400 dark:text-gray-500 block text-center">Inspired by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" rel="noopener noreferrer" href="https://tools-shivam-dev.vercel.app/">shivam.dev</a></span>
         </div>
       </div>
     </aside>
