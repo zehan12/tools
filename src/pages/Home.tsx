@@ -35,15 +35,24 @@ export function Home() {
           ))}
         </div>
 
-        <div className="flex pt-4">
+        <div className="flex items-center gap-6 pt-4">
           <a
             href="https://github.com/scmmishra/tools.zehan"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2"
+            className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors"
           >
             <Icon aria-hidden="true" icon="ph:github-logo" className="size-4" />
             {t('app.viewOnGithub')}
+          </a>
+          <a
+            href="/llm.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors"
+          >
+            <Icon aria-hidden="true" icon="ph:file-text" className="size-4" />
+            llm.txt
           </a>
         </div>
       </div>
