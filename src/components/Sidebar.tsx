@@ -22,6 +22,7 @@ export function Sidebar() {
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            aria-label="Toggle theme"
           >
             <Icon icon={theme === 'dark' ? 'ph:sun' : 'ph:moon'} className="size-5" />
           </button>
@@ -37,6 +38,7 @@ export function Sidebar() {
             document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))
           }}
           className="group flex items-center justify-between w-full px-2 py-1.5 mb-4 text-sm text-muted-foreground bg-muted/30 outline outline-border hover:bg-muted/50 transition-colors shrink-0"
+          aria-label="Search tools"
         >
           <span className="flex items-center gap-2">
             <Icon icon="ph:magnifying-glass" className="size-4" />

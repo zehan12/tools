@@ -29,7 +29,7 @@ function Home() {
             >
               <div className="flex items-center justify-between">
                 <h2 className="font-semibold text-foreground">{tool.title}</h2>
-                <Icon icon="ph:arrow-right" className="size-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <Icon aria-hidden="true" icon="ph:arrow-right" className="size-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {tool.description}
@@ -45,7 +45,7 @@ function Home() {
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2"
           >
-            <Icon icon="ph:github-logo" className="size-4" />
+            <Icon aria-hidden="true" icon="ph:github-logo" className="size-4" />
             View on GitHub
           </a>
         </div>

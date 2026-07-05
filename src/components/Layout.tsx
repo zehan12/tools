@@ -5,8 +5,15 @@ import { CommandPalette } from "./CommandPalette"
 export function Layout() {
   return (
     <div className="flex flex-wrap bg-gray-50 dark:bg-[#111]/10 font-mono text-gray-900 dark:text-gray-100 transition-colors">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black outline outline-border"
+      >
+        Skip to main content
+      </a>
       <Sidebar />
       <main
+        id="main-content"
         className="basis-0 grow-999 min-h-screen p-3 flex flex-col"
         style={{ minInlineSize: "60%" }}
       >
