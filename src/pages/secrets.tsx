@@ -20,7 +20,7 @@ export default function SecretsTool() {
     if (useLowercase) charset += "abcdefghijklmnopqrstuvwxyz"
     if (useNumbers) charset += "0123456789"
     if (useSymbols) charset += "!@#$%^&*()_+~`|}{[]:;?><,./-="
-    
+
     if (!charset) {
       setSecret("Please select at least one character set.")
       return
@@ -29,7 +29,7 @@ export default function SecretsTool() {
     let result = ""
     const randomValues = new Uint32Array(length)
     window.crypto.getRandomValues(randomValues)
-    
+
     for (let i = 0; i < length; i++) {
       result += charset[randomValues[i] % charset.length]
     }
@@ -37,13 +37,13 @@ export default function SecretsTool() {
   }
 
   return (
-    <ToolLayout 
-      title="Secret Generator" 
+    <ToolLayout
+      title="Secret Generator"
       description="Generate cryptographically secure secrets and passwords with configurable length and special characters."
     >
       <div className="max-w-2xl mx-auto flex flex-col gap-8">
         <div className="p-6 bg-muted rounded-xl border relative group">
-          <div className="text-2xl font-mono text-center break-all select-all min-h-[2.5rem]">
+          <div className="text-2xl font-mono text-center break-all select-all min-h-10">
             {secret || "Click generate to start"}
           </div>
           {secret && (
@@ -57,19 +57,19 @@ export default function SecretsTool() {
             </Button>
           )}
         </div>
-        
+
         <div className="flex flex-col gap-6 p-6 border rounded-xl">
           <div className="flex flex-col gap-2">
             <Label>Length: {length}</Label>
-            <input 
-              type="range" 
-              min="8" max="128" 
-              value={length} 
+            <input
+              type="range"
+              min="8" max="128"
+              value={length}
               onChange={(e) => setLength(Number(e.target.value))}
               className="w-full"
             />
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4">
             <div className="flex items-center space-x-2">
               <Checkbox id="uppercase" checked={useUppercase} onCheckedChange={(c) => setUseUppercase(c as boolean)} />
@@ -88,7 +88,7 @@ export default function SecretsTool() {
               <Label htmlFor="symbols">Symbols (!@#$)</Label>
             </div>
           </div>
-          
+
           <Button onClick={generateSecret} className="mt-4 w-full flex gap-2">
             <RefreshCwIcon className="w-4 h-4" /> Generate Secret
           </Button>

@@ -45,8 +45,8 @@ export default function HmacTool() {
   }
 
   return (
-    <ToolLayout 
-      title="HMAC Generator" 
+    <ToolLayout
+      title="HMAC Generator"
       description="Generate a Hash-based Message Authentication Code (HMAC) to verify message integrity and authenticity using your secret key."
       onClear={clearAll}
     >
@@ -59,7 +59,7 @@ export default function HmacTool() {
               placeholder="Enter message to hash..."
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="resize-none font-mono grow min-h-[8rem]"
+              className="resize-none font-mono grow min-h-32"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -88,7 +88,7 @@ export default function HmacTool() {
             </Select>
           </div>
         </div>
-        
+
         <div className="flex flex-col gap-2 w-full md:w-1/2">
           <Label htmlFor="hmac-output">HMAC Result (Hex)</Label>
           <Textarea
