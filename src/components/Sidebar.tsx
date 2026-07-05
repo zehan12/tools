@@ -3,6 +3,13 @@ import { useTheme } from "@/components/theme-provider"
 import { tools, Category } from "@/tools"
 import { Icon } from "@iconify/react"
 import { useTranslation } from "react-i18next"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+const LANGUAGES = [
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+]
 
 export function Sidebar() {
   const location = useLocation()
@@ -14,13 +21,6 @@ export function Sidebar() {
     tools: tools.filter(t => t.category === category)
   })).filter(c => c.tools.length > 0)
 
-  const toggleLanguage = () => {
-    const langs = ['en', 'es', 'fr']
-    const currentIndex = langs.indexOf(i18n.resolvedLanguage || 'en')
-    const nextIndex = (currentIndex + 1) % langs.length
-    i18n.changeLanguage(langs[nextIndex])
-  }
-
   return (
     <aside className="sticky top-0 hidden sm:grid h-screen p-3 pr-0 basis-72 lg:basis-80">
       <div className="flex flex-col h-full bg-white dark:bg-[#111] outline outline-border px-4 py-3 overflow-hidden transition-colors">
@@ -29,23 +29,35 @@ export function Sidebar() {
             Tools
           </Link>
           <div className="flex items-center gap-1">
-            <button
-              onClick={toggleLanguage}
-              className="p-1.5 text-xs font-bold text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors uppercase"
-              aria-label={t('sidebar.languageToggle')}
-            >
-              {i18n.resolvedLanguage || 'en'}
-            </button>
+            <Select value={i18n.resolvedLanguage || 'en'} onValueChange={(val) => i18n.changeLanguage(val)}>
+              <SelectTrigger 
+                className="h-8 border-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-0 shadow-none px-2 w-fit" 
+                size="sm"
+                aria-label={t('sidebar.languageToggle')}
+              >
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {LANGUAGES.map((lang) => (
+                  <SelectItem key={lang.code} value={lang.code} className="cursor-pointer">
+                    <span className="flex items-center gap-2">
+                      <span className="text-sm leading-none">{lang.flag}</span>
+                      <span className="uppercase text-xs font-bold">{lang.code}</span>
+                    </span>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              className="p-1.5 text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors rounded hover:bg-gray-100 dark:hover:bg-gray-800"
               aria-label={t('sidebar.themeToggle')}
             >
               <Icon icon={theme === 'dark' ? 'ph:sun' : 'ph:moon'} className="size-5" />
             </button>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 shrink-0">
+        <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 mt-2 shrink-0">
           <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
           <span>•</span>
           <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="/llm.txt">llm.txt</a>
