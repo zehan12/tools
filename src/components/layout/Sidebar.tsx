@@ -61,8 +61,6 @@ export function Sidebar() {
         </div>
         <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 mt-2 shrink-0">
           <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
-          <span>•</span>
-          <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="/llm.txt">llm.txt</a>
         </div>
 
         <button
