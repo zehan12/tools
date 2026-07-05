@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import { useTheme } from "@/components/providers/theme-provider"
+import { useTheme } from "@/providers/theme-provider"
 import { tools, Category } from "@/tools"
 import { Icon } from "@iconify/react"
 import { useTranslation } from "react-i18next"
@@ -30,7 +30,7 @@ export function Sidebar() {
             Tools
           </Link>
           <div className="flex items-center gap-1">
-            <Select value={i18n.resolvedLanguage || 'en'} onValueChange={(val) => i18n.changeLanguage(val)}>
+            <Select value={i18n.resolvedLanguage || 'en'} onValueChange={(val) => i18n.changeLanguage(val as string)}>
               <SelectTrigger 
                 className="h-8 border-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-0 shadow-none px-2 w-fit" 
                 size="sm"
