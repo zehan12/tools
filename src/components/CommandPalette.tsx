@@ -35,7 +35,7 @@ export function CommandPalette() {
                 setOpen(false)
               }}
             >
-              <Icon aria-hidden="true" icon={tool.icon || "carbon:tool"} className="mr-2 h-4 w-4" />
+              <Icon aria-hidden="true" icon={tool.icon || "carbon:tool"} className="me-2 h-4 w-4" />
               <span>{t(`tools.${tool.slug}.title`, tool.title)}</span>
             </CommandItem>
           ))}

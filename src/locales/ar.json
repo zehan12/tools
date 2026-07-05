@@ -1,0 +1,113 @@
+{
+  "app": {
+    "title": "أدوات المطور",
+    "description": "مجموعة من أدوات المطورين المفيدة التي تعمل بالكامل في متصفحك. بياناتك لا تغادر جهازك أبداً.",
+    "viewOnGithub": "عرض على جيت هاب",
+    "searchPlaceholder": "ابحث عن الأدوات...",
+    "noResults": "لم يتم العثور على نتائج.",
+    "searchTools": "أدوات البحث",
+    "clearData": "مسح البيانات المحفوظة",
+    "skipToContent": "تخطي إلى المحتوى الرئيسي"
+  },
+  "sidebar": {
+    "by": "بواسطة",
+    "themeToggle": "تبديل المظهر",
+    "languageToggle": "تبديل اللغة"
+  },
+  "categories": {
+    "Cryptography": "التشفير",
+    "Encoding": "الترميز",
+    "Network": "الشبكة",
+    "Math": "رياضيات",
+    "Formatting": "التنسيق",
+    "Security": "الأمان",
+    "Colors": "الألوان",
+    "Time": "الوقت",
+    "Finance": "المالية",
+    "Misc": "متفرقات"
+  },
+  "tools": {
+    "base64": {
+      "title": "وحدة فك ترميز Base64",
+      "description": "قم بفك ترميز نصوص Base64 بسرعة وسهولة في متصفحك."
+    },
+    "base64-encode": {
+      "title": "مشفر Base64",
+      "description": "قم بتشفير النصوص إلى صيغة Base64 بسرعة وسهولة في متصفحك."
+    },
+    "jwt": {
+      "title": "وحدة فك / تشفير JWT",
+      "description": "قم بفك، فحص، وتشفير JSON Web Tokens (JWT) لعرض العنوان والحمولة والتوقيع."
+    },
+    "color": {
+      "title": "محول الألوان",
+      "description": "قم بتحويل الألوان بين التنسيقات المختلفة (HEX، RGB، HSL، إلخ) مع معاينة مباشرة."
+    },
+    "color-compare": {
+      "title": "مقارنة الألوان",
+      "description": "قارن لونين جنباً إلى جنب مع عينات حية."
+    },
+    "hmac": {
+      "title": "مولد HMAC",
+      "description": "قم بإنشاء كود مصادقة الرسائل (HMAC) للتحقق من سلامة الرسالة."
+    },
+    "secrets": {
+      "title": "مولد الأسرار",
+      "description": "قم بإنشاء أسرار وكلمات مرور آمنة من الناحية المشفرة مع طول وأحرف قابلة للتكوين."
+    },
+    "diff": {
+      "title": "مقارنة النصوص",
+      "description": "قارن نصين وشاهد الاختلافات بينهما مبرزة."
+    },
+    "word-counter": {
+      "title": "عداد الكلمات",
+      "description": "عد الأحرف والكلمات والجمل والفقرات في النص الخاص بك."
+    },
+    "sql-formatter": {
+      "title": "منسق SQL",
+      "description": "قم بتنسيق وتجميل استعلامات SQL مع إبراز بناء الجملة."
+    },
+    "json-formatter": {
+      "title": "منسق JSON",
+      "description": "قم بتنسيق وتجميل بيانات JSON الخاصة بك على الفور."
+    },
+    "qr-code": {
+      "title": "مولد رمز الاستجابة السريعة (QR)",
+      "description": "قم بإنشاء رموز QR من النصوص أو الروابط أو أي بيانات."
+    },
+    "notification-tester": {
+      "title": "مختبر الإشعارات",
+      "description": "اختبر إشعارات المتصفح مع معالجة الأذونات."
+    },
+    "secret-sharing": {
+      "title": "مشاركة السر",
+      "description": "قم بتشفير سر بكلمة مرور وشاركه عبر رابط."
+    },
+    "dns-records": {
+      "title": "سجلات DNS",
+      "description": "ابحث عن سجلات DNS لأي نطاق."
+    },
+    "timezone-converter": {
+      "title": "محول المنطقة الزمنية",
+      "description": "قم بتحويل الأوقات بين المناطق الزمنية المختلفة."
+    },
+    "india-income-tax": {
+      "title": "حاسبة ضريبة الدخل",
+      "description": "احسب ضريبة الدخل لنظام الضرائب الجديد في الهند."
+    },
+    "bounty-calculator": {
+      "title": "حاسبة المكافآت",
+      "description": "اقترح دفع مكافأة اكتشاف الأخطاء من سلسلة ناقل CVSS."
+    },
+    "cvss-calculator": {
+      "title": "حاسبة CVSS",
+      "description": "قم ببناء ناقل CVSS v3.1 واعرض النتيجة الأساسية الحية."
+    }
+  },
+  "common": {
+    "errorEncoding": "خطأ في تشفير الإدخال",
+    "inputText": "نص الإدخال",
+    "typeTextToEncode": "اكتب النص لتشفيره...",
+    "base64Output": "مخرجات Base64"
+  }
+}

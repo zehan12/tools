@@ -5,11 +5,13 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import en from './locales/en.json'
 import es from './locales/es.json'
 import fr from './locales/fr.json'
+import ar from './locales/ar.json'
 
 const resources = {
   en: { translation: en },
   es: { translation: es },
   fr: { translation: fr },
+  ar: { translation: ar },
 }
 
 i18n

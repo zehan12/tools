@@ -9,6 +9,7 @@ const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
 ]
 
 export function Sidebar() {
@@ -22,7 +23,7 @@ export function Sidebar() {
   })).filter(c => c.tools.length > 0)
 
   return (
-    <aside className="sticky top-0 hidden sm:grid h-screen p-3 pr-0 basis-72 lg:basis-80">
+    <aside className="sticky top-0 hidden sm:grid h-screen p-3 pe-0 basis-72 lg:basis-80">
       <div className="flex flex-col h-full bg-white dark:bg-[#111] outline outline-border px-4 py-3 overflow-hidden transition-colors">
         <div className="flex items-center justify-between shrink-0">
           <Link to="/" className="text-xl font-medium uppercase tracking-wider text-gray-900 dark:text-gray-100">
