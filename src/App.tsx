@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Layout } from "@/components/layout/Layout"
-import { tools } from "@/tools"
+import { tools } from "@/config/tools"
 import { RootProvider } from "@/providers/RootProvider"
 import { Home } from "@/pages/Home"
 

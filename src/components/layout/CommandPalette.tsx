@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Icon } from "@iconify/react"
 import { useNavigate } from "react-router-dom"
-import { tools } from "@/tools"
+import { tools } from "@/config/tools"
 import { useTranslation } from "react-i18next"
 
 export function CommandPalette() {

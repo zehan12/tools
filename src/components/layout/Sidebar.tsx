@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 import { useTheme } from "@/providers/theme-provider"
-import { tools, Category } from "@/tools"
+import { tools } from "@/config/tools"
+import { Category } from "@/types/tools"
 import { Icon } from "@iconify/react"
 import { useTranslation } from "react-i18next"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"

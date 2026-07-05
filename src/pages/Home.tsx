@@ -1,4 +1,4 @@
-import { tools } from "@/tools"
+import { tools } from "@/config/tools"
 import { Icon } from "@iconify/react"
 import { Link } from "react-router-dom"
 import { SEO } from "@/components/common/SEO"
