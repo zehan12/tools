@@ -34,15 +34,24 @@ export function Home() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-          <div className="relative w-full sm:max-w-xs">
-            <Icon icon="ph:magnifying-glass" className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <div className="relative w-full sm:max-w-xs flex items-center">
+            <Icon icon="ph:magnifying-glass" className="absolute left-3 text-muted-foreground" />
             <input 
               type="text" 
               placeholder={t('app.searchPlaceholder', "Search tools...")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-10 pl-9 pr-4 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full h-10 pl-9 pr-8 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             />
+            {search && (
+              <button 
+                onClick={() => setSearch("")}
+                className="absolute right-3 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Clear search"
+              >
+                <Icon icon="ph:x" className="size-4" />
+              </button>
+            )}
           </div>
           
           <div className="flex gap-2 w-full overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
@@ -85,7 +94,7 @@ export function Home() {
 
         <div className="flex items-center gap-6 pt-4">
           <a
-            href="https://github.com/scmmishra/tools.zehan"
+            href="https://github.com/zehan12/tools"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors"
