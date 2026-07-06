@@ -170,5 +170,29 @@ export const tools: ToolDef[] = [
     description: "A virtual whiteboard for sketching hand-drawn like diagrams.",
     icon: "carbon:draw",
     category: Category.Dev,
+  },
+  {
+    slug: Tools.UrlEncoder,
+    title: "URL Encoder / Decoder",
+    component: lazy(() => import("@/pages/url-encoder")),
+    description: "Quickly encode or decode URI components and query parameters.",
+    icon: "carbon:link",
+    category: Category.Encoding,
+  },
+  {
+    slug: Tools.CronGenerator,
+    title: "Cron Expression Generator",
+    component: lazy(() => import("@/pages/cron-generator")),
+    description: "Visually build, decode, and explain Cron schedules in plain English.",
+    icon: "carbon:time",
+    category: Category.Dev,
+  },
+  {
+    slug: Tools.RestClient,
+    title: "HTTP / REST Client",
+    component: lazy(() => import("@/pages/rest-client")),
+    description: "A lightweight, in-browser fetch tester for endpoints.",
+    icon: "carbon:api",
+    category: Category.Dev,
   }
 ];

@@ -32,6 +32,9 @@ export const Tools = {
   CvssCalculator: "cvss-calculator",
   MarkdownViewer: "markdown-viewer",
   Whiteboard: "whiteboard",
+  UrlEncoder: "url-encoder",
+  CronGenerator: "cron-generator",
+  RestClient: "rest-client",
 } as const;
 export type Tools = typeof Tools[keyof typeof Tools];
 
