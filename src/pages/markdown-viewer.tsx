@@ -38,8 +38,8 @@ export default function MarkdownViewerTool() {
   const [input, setInput, clearInput] = usePersist("tools-markdown-viewer", defaultMarkdown)
 
   return (
-    <ToolLayout 
-      title="Markdown Viewer" 
+    <ToolLayout
+      title="Markdown Viewer"
       description="Preview markdown with live rendering, syntax highlighting, and standard GitHub-flavored Markdown support."
       onClear={clearInput}
     >
@@ -47,13 +47,15 @@ export default function MarkdownViewerTool() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[calc(100vh-14rem)] min-h-[500px]">
           <div className="flex flex-col gap-2 h-full min-h-0">
             <Label htmlFor="input-markdown">{t('tools.markdown-viewer.raw', "Raw Markdown")}</Label>
-            <Textarea
-              id="input-markdown"
-              placeholder="# Type your markdown here..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="flex-1 resize-none font-mono text-sm min-h-0"
-            />
+            <ScrollArea className="flex-1 min-h-0 border outline-border">
+              <Textarea
+                id="input-markdown"
+                placeholder="# Type your markdown here..."
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full h-full min-h-full resize-none font-mono text-sm border-0 focus-visible:ring-0 rounded-none shadow-none"
+              />
+            </ScrollArea>
           </div>
           <div className="flex flex-col gap-2 h-full min-h-0">
             <Label>{t('tools.markdown-viewer.preview', "Preview")}</Label>
