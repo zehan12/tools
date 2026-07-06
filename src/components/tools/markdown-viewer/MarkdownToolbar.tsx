@@ -16,7 +16,6 @@ import {
   AlertCircle,
   Maximize,
   Minimize,
-  Focus,
   Search,
   Type,
   Undo,
@@ -44,7 +43,10 @@ import {
   Copyright,
   Workflow,
   HelpCircle,
-  Info
+  Info,
+  Columns,
+  PenSquare,
+  Eye
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -56,6 +58,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { useMarkdownViewerStore } from '@/store/markdown-viewer'
 import EmojiPicker from 'emoji-picker-react'
 
@@ -66,7 +69,7 @@ interface MarkdownToolbarProps {
 }
 
 export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolbarProps) {
-  const { isZenMode, isFullscreen, zoomLevel, toggleZenMode, toggleFullscreen, setZoomLevel } = useMarkdownViewerStore()
+  const { viewMode, isFullscreen, zoomLevel, setViewMode, toggleFullscreen, setZoomLevel } = useMarkdownViewerStore()
   
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -247,8 +250,8 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
     }
   }
 
-  const ToolbarButton = ({ icon: Icon, onClick, title }: { icon: any, onClick: () => void, title: string }) => (
-    <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={onClick} title={title}>
+  const ToolbarButton = ({ icon: Icon, onClick, title, active = false }: { icon: any, onClick: () => void, title: string, active?: boolean }) => (
+    <Button variant="ghost" size="icon" className={`h-8 w-8 ${active ? 'bg-muted text-primary' : 'text-muted-foreground hover:text-foreground'}`} onClick={onClick} title={title}>
       <Icon className="h-4 w-4" />
     </Button>
   )
@@ -327,7 +330,11 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
         <ToolbarButton icon={Info} onClick={() => handleAction('info')} title="Info" />
         <div className="w-px h-4 bg-border mx-1" />
 
-        <ToolbarButton icon={Focus} onClick={toggleZenMode} title={isZenMode ? "Exit Zen Mode" : "Zen Mode"} />
+        <ToolbarButton icon={PenSquare} onClick={() => setViewMode('editor')} title="Editor Only" active={viewMode === 'editor'} />
+        <ToolbarButton icon={Columns} onClick={() => setViewMode('split')} title="Split View" active={viewMode === 'split'} />
+        <ToolbarButton icon={Eye} onClick={() => setViewMode('preview')} title="Preview Only" active={viewMode === 'preview'} />
+        <div className="w-px h-4 bg-border mx-1" />
+
         <ToolbarButton icon={isFullscreen ? Minimize : Maximize} onClick={toggleFullscreen} title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"} />
       </div>
 
@@ -370,13 +377,15 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
 
       <Dialog open={isEmojiModalOpen} onOpenChange={setIsEmojiModalOpen}>
         <DialogContent className="p-0 border-none bg-transparent shadow-none flex justify-center items-center [&>button]:hidden sm:max-w-fit">
-          <EmojiPicker 
-            onEmojiClick={(emojiData) => {
-              insertText(emojiData.emoji, '')
-              setIsEmojiModalOpen(false)
-            }}
-            theme={'auto' as any}
-          />
+          <ScrollArea className="max-h-[80vh] overflow-auto flex rounded-lg">
+            <EmojiPicker 
+              onEmojiClick={(emojiData) => {
+                insertText(emojiData.emoji, '')
+                setIsEmojiModalOpen(false)
+              }}
+              theme={'auto' as any}
+            />
+          </ScrollArea>
         </DialogContent>
       </Dialog>
     </div>
