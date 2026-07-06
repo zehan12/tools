@@ -4,8 +4,8 @@ import { z } from "zod";
 export const env = createEnv({
   clientPrefix: "VITE_",
   client: {
-    // Add client-side environment variables here
-    // VITE_API_URL: z.string().url().optional(),
+    VITE_DOMAIN: z.string().url().default("https://tools.zehan.com"),
+    VITE_INSPIRED_BY_URL: z.string().url().default("https://tools-shivam-dev.vercel.app/"),
   },
   server: {
     // Add server-side environment variables here

@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom"
+import { env } from "@/env"
 
 interface SEOProps {
   title?: string
@@ -13,8 +14,7 @@ export function SEO({
 }: SEOProps) {
   const location = useLocation()
   
-  // Update with actual production domain when available
-  const domain = "https://tools.zehan.com"
+  const domain = env.VITE_DOMAIN
   const url = `${domain}${location.pathname}`
   
   const formattedTitle = title === "Developer Tools" ? title : `${title} | Developer Tools`
