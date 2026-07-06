@@ -49,11 +49,29 @@
     },
     "hmac": {
       "title": "Generador HMAC",
-      "description": "Genera un HMAC para verificar la integridad del mensaje."
+      "description": "Genera un HMAC para verificar la integridad del mensaje.",
+      "messageString": "Cadena de mensaje",
+      "enterMessage": "Ingrese el mensaje...",
+      "secretKey": "Clave secreta",
+      "enterSecret": "Ingrese la clave secreta...",
+      "hashAlgorithm": "Algoritmo Hash",
+      "selectAlgorithm": "Seleccionar algoritmo",
+      "sha1": "SHA-1 (Inseguro)",
+      "hmacResult": "Resultado HMAC (Hex)",
+      "resultPlaceholder": "El resultado aparecerá aquí...",
+      "error": "Error al generar HMAC"
     },
     "secrets": {
       "title": "Generador de Secretos",
-      "description": "Genera contraseñas seguras y secretos configurables."
+      "description": "Genera contraseñas seguras y secretos configurables.",
+      "length": "Longitud",
+      "uppercase": "Mayúsculas (A-Z)",
+      "lowercase": "Minúsculas (a-z)",
+      "numbers": "Números (0-9)",
+      "symbols": "Símbolos (!@#$)",
+      "generate": "Generar secreto",
+      "errorNoCharset": "Seleccione al menos un conjunto de caracteres.",
+      "clickToStart": "Haga clic en generar para comenzar"
     },
     "diff": {
       "title": "Diferencia de Texto",

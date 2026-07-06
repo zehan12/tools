@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { ToolLayout } from "@/components/common/ToolLayout"
 import { usePersist } from "@/hooks/use-persist"
 import { Input } from "@/components/ui/input"
@@ -7,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function HmacTool() {
+  const { t } = useTranslation()
   const [text, setText] = usePersist("tools-hmac-text", "")
   const [secret, setSecret] = usePersist("tools-hmac-secret", "")
   const [algo, setAlgo] = usePersist("tools-hmac-algo", "SHA-256")
@@ -32,7 +34,7 @@ export default function HmacTool() {
         const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
         setOutput(hashHex)
       } catch (e) {
-        setOutput("Error generating HMAC")
+        setOutput(t('tools.hmac.error', "Error generating HMAC"))
       }
     }
     computeHmac()
@@ -53,34 +55,34 @@ export default function HmacTool() {
       <div className="flex flex-col md:flex-row gap-6 grow min-h-[500px]">
         <div className="flex flex-col gap-4 w-full md:w-1/2">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="input-text">Message String</Label>
+            <Label htmlFor="input-text">{t('tools.hmac.messageString', "Message String")}</Label>
             <Textarea
               id="input-text"
-              placeholder="Enter message to hash..."
+              placeholder={t('tools.hmac.enterMessage', "Enter message to hash...")}
               value={text}
               onChange={(e) => setText(e.target.value)}
               className="resize-none font-mono grow min-h-32"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="secret-key">Secret Key</Label>
+            <Label htmlFor="secret-key">{t('tools.hmac.secretKey', "Secret Key")}</Label>
             <Input
               id="secret-key"
               type="password"
-              placeholder="Enter secret key..."
+              placeholder={t('tools.hmac.enterSecret', "Enter secret key...")}
               value={secret}
               onChange={(e) => setSecret(e.target.value)}
               className="font-mono"
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label>Hash Algorithm</Label>
+            <Label>{t('tools.hmac.hashAlgorithm', "Hash Algorithm")}</Label>
             <Select value={algo} onValueChange={(val: any) => setAlgo(val)}>
               <SelectTrigger>
-                <SelectValue placeholder="Select algorithm" />
+                <SelectValue placeholder={t('tools.hmac.selectAlgorithm', "Select algorithm")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="SHA-1">SHA-1 (Insecure)</SelectItem>
+                <SelectItem value="SHA-1">{t('tools.hmac.sha1', "SHA-1 (Insecure)")}</SelectItem>
                 <SelectItem value="SHA-256">SHA-256</SelectItem>
                 <SelectItem value="SHA-384">SHA-384</SelectItem>
                 <SelectItem value="SHA-512">SHA-512</SelectItem>
@@ -90,13 +92,13 @@ export default function HmacTool() {
         </div>
 
         <div className="flex flex-col gap-2 w-full md:w-1/2">
-          <Label htmlFor="hmac-output">HMAC Result (Hex)</Label>
+          <Label htmlFor="hmac-output">{t('tools.hmac.hmacResult', "HMAC Result (Hex)")}</Label>
           <Textarea
             id="hmac-output"
             readOnly
             value={output}
             className="flex-1 resize-none bg-muted font-mono break-all text-primary"
-            placeholder="Result will appear here..."
+            placeholder={t('tools.hmac.resultPlaceholder', "Result will appear here...")}
           />
         </div>
       </div>

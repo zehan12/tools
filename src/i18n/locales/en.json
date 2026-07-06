@@ -49,11 +49,29 @@
     },
     "hmac": {
       "title": "HMAC Generator",
-      "description": "Generate a Hash-based Message Authentication Code (HMAC) to verify message integrity and authenticity using your secret key."
+      "description": "Generate a Hash-based Message Authentication Code (HMAC) to verify message integrity and authenticity using your secret key.",
+      "messageString": "Message String",
+      "enterMessage": "Enter message to hash...",
+      "secretKey": "Secret Key",
+      "enterSecret": "Enter secret key...",
+      "hashAlgorithm": "Hash Algorithm",
+      "selectAlgorithm": "Select algorithm",
+      "sha1": "SHA-1 (Insecure)",
+      "hmacResult": "HMAC Result (Hex)",
+      "resultPlaceholder": "Result will appear here...",
+      "error": "Error generating HMAC"
     },
     "secrets": {
       "title": "Secret Generator",
-      "description": "Generate cryptographically secure secrets and passwords with configurable length and special characters."
+      "description": "Generate cryptographically secure secrets and passwords with configurable length and special characters.",
+      "length": "Length",
+      "uppercase": "Uppercase (A-Z)",
+      "lowercase": "Lowercase (a-z)",
+      "numbers": "Numbers (0-9)",
+      "symbols": "Symbols (!@#$)",
+      "generate": "Generate Secret",
+      "errorNoCharset": "Please select at least one character set.",
+      "clickToStart": "Click generate to start"
     },
     "diff": {
       "title": "Text Diff",
