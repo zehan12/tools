@@ -4,6 +4,8 @@ import path from "path"
 import tailwindcss from '@tailwindcss/vite'
 import babel from '@rolldown/plugin-babel'
 import { VitePWA } from 'vite-plugin-pwa'
+import Sitemap from 'vite-plugin-sitemap'
+import { Tools } from './src/types/tools.ts'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,6 +13,10 @@ export default defineConfig({
     tailwindcss(),
     react(),
     babel({ presets: [reactCompilerPreset()] }),
+    Sitemap({
+      hostname: 'https://tools.zehan.com',
+      dynamicRoutes: Object.values(Tools).map(tool => `/${tool}`)
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
