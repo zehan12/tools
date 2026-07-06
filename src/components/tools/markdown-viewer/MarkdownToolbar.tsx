@@ -24,7 +24,27 @@ import {
   FolderOpen,
   Download,
   ZoomIn,
-  ZoomOut
+  ZoomOut,
+  Eraser,
+  Bold,
+  Italic,
+  CaseSensitive,
+  CaseUpper,
+  CaseLower,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  List,
+  ListOrdered,
+  BookOpen,
+  Sigma,
+  Copyright,
+  Workflow,
+  HelpCircle,
+  Info
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -85,19 +105,57 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
     }, 0)
   }
 
+  const handleTransformText = (transformFn: (text: string) => string) => {
+    if (!textareaRef.current) return
+    const textarea = textareaRef.current
+    const start = textarea.selectionStart
+    const end = textarea.selectionEnd
+    if (start === end) return // No text selected
+    const selectedText = textarea.value.substring(start, end)
+    const replacement = transformFn(selectedText)
+    
+    const newValue = textarea.value.substring(0, start) + replacement + textarea.value.substring(end)
+    onChange(newValue)
+    
+    setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.focus()
+        textareaRef.current.setSelectionRange(start, start + replacement.length)
+      }
+    }, 0)
+  }
+
   const handleAction = (action: string) => {
     switch (action) {
+      case 'clear': onChange(''); break;
+      case 'bold': insertText('**', '**'); break;
       case 'strikethrough': insertText('~~', '~~'); break;
+      case 'italic': insertText('*', '*'); break;
       case 'blockquote': insertText('> ', ''); break;
-      case 'align-left': insertText('<div align="left">\n\n', '\n\n</div>'); break;
-      case 'align-center': insertText('<div align="center">\n\n', '\n\n</div>'); break;
-      case 'align-right': insertText('<div align="right">\n\n', '\n\n</div>'); break;
-      case 'rtl': insertText('<div dir="rtl">\n\n', '\n\n</div>'); break;
-      case 'hr': insertText('\n---\n', ''); break;
-      case 'code': insertText('```\n', '\n```'); break;
-      case 'terminal': insertText('```bash\n', '\n```'); break;
-      case 'alert': insertText('> [!NOTE]\n> ', ''); break;
+      case 'case-upper': handleTransformText(t => t.toUpperCase()); break;
+      case 'case-lower': handleTransformText(t => t.toLowerCase()); break;
+      case 'case-title': handleTransformText(t => t.replace(/\\w\\S*/g, w => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase())); break;
+      case 'align-left': insertText('<div align="left">\\n\\n', '\\n\\n</div>'); break;
+      case 'align-center': insertText('<div align="center">\\n\\n', '\\n\\n</div>'); break;
+      case 'align-right': insertText('<div align="right">\\n\\n', '\\n\\n</div>'); break;
+      case 'rtl': insertText('<div dir="rtl">\\n\\n', '\\n\\n</div>'); break;
+      case 'h1': insertText('# ', ''); break;
+      case 'h2': insertText('## ', ''); break;
+      case 'h3': insertText('### ', ''); break;
+      case 'h4': insertText('#### ', ''); break;
+      case 'h5': insertText('##### ', ''); break;
+      case 'h6': insertText('###### ', ''); break;
+      case 'ul': insertText('- ', ''); break;
+      case 'ol': insertText('1. ', ''); break;
+      case 'hr': insertText('\\n---\\n', ''); break;
+      case 'link': insertText('[', '](https://)'); break;
+      case 'code': insertText('```\\n', '\\n```'); break;
+      case 'terminal': insertText('```bash\\n', '\\n```'); break;
+      case 'math': insertText('$$ \\n', '\\n $$'); break;
+      case 'alert': insertText('> [!NOTE]\\n> ', ''); break;
       case 'date': insertText(new Date().toLocaleString(), ''); break;
+      case 'copyright': insertText('©', ''); break;
+      case 'mermaid': insertText('```mermaid\\ngraph TD\\n  A-->B;\\n```\\n', ''); break;
       case 'undo':
         textareaRef.current?.focus();
         document.execCommand('undo');
@@ -119,6 +177,12 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        break;
+      case 'help':
+        alert("Markdown formatting help:\\n**Bold**\\n*Italic*\\n~~Strikethrough~~\\n> Blockquote\\n# H1");
+        break;
+      case 'info':
+        alert("Markdown Viewer Tool\\nBuilt with React, Tailwind CSS, and Shadcn UI.");
         break;
     }
   }
@@ -144,7 +208,7 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
     insertText(`[${id}]`, '')
     
     // Append to end of document
-    const appendText = `\n[${id}]: ${refLink} "${refTitle}"`
+    const appendText = `\\n[${id}]: ${refLink} "${refTitle}"`
     onChange(value + appendText)
     setIsRefModalOpen(false)
     setRefId('')
@@ -161,15 +225,15 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
   }
 
   const handleInsertTable = () => {
-    let table = '\n|'
+    let table = '\\n|'
     for (let i = 0; i < tableCols; i++) table += ` Header ${i + 1} |`
-    table += '\n|'
+    table += '\\n|'
     for (let i = 0; i < tableCols; i++) table += ' --- |'
     for (let r = 0; r < tableRows; r++) {
-      table += '\n|'
+      table += '\\n|'
       for (let i = 0; i < tableCols; i++) table += ` Cell ${r + 1}-${i + 1} |`
     }
-    table += '\n'
+    table += '\\n'
     insertText(table, '')
     setIsTableModalOpen(false)
   }
@@ -190,50 +254,79 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
   )
 
   return (
-    <div className="flex flex-wrap items-center gap-1 p-1 bg-muted/50 border-b border-border rounded-t-md">
+    <div className="flex flex-wrap items-center gap-1 p-1 bg-muted/50 border-b border-border rounded-t-md overflow-x-auto">
       <input type="file" ref={fileInputRef} className="hidden" accept=".md,.txt,text/markdown,text/plain" onChange={handleFileImport} />
       
+      {/* Group 1 */}
       <ToolbarButton icon={Undo} onClick={() => handleAction('undo')} title="Undo (Ctrl+Z)" />
       <ToolbarButton icon={Redo} onClick={() => handleAction('redo')} title="Redo (Ctrl+Y)" />
+      <ToolbarButton icon={Eraser} onClick={() => handleAction('clear')} title="Clear All Text" />
       <div className="w-px h-4 bg-border mx-1" />
 
-      <ToolbarButton icon={FolderOpen} onClick={() => handleAction('import')} title="Import .md file" />
-      <ToolbarButton icon={Download} onClick={() => handleAction('export')} title="Export as .md" />
-      <div className="w-px h-4 bg-border mx-1" />
-
+      {/* Group 2 */}
+      <ToolbarButton icon={Bold} onClick={() => handleAction('bold')} title="Bold" />
       <ToolbarButton icon={Strikethrough} onClick={() => handleAction('strikethrough')} title="Strikethrough" />
+      <ToolbarButton icon={Italic} onClick={() => handleAction('italic')} title="Italic" />
       <ToolbarButton icon={Quote} onClick={() => handleAction('blockquote')} title="Blockquote" />
+      <ToolbarButton icon={CaseSensitive} onClick={() => handleAction('case-title')} title="Capitalize Each Word" />
+      <ToolbarButton icon={CaseUpper} onClick={() => handleAction('case-upper')} title="UPPERCASE" />
+      <ToolbarButton icon={CaseLower} onClick={() => handleAction('case-lower')} title="lowercase" />
       <div className="w-px h-4 bg-border mx-1" />
       
+      {/* Group 3 */}
       <ToolbarButton icon={AlignLeft} onClick={() => handleAction('align-left')} title="Align Left" />
       <ToolbarButton icon={AlignCenter} onClick={() => handleAction('align-center')} title="Align Center" />
       <ToolbarButton icon={AlignRight} onClick={() => handleAction('align-right')} title="Align Right" />
       <ToolbarButton icon={Type} onClick={() => handleAction('rtl')} title="Right to Left (RTL)" />
       <div className="w-px h-4 bg-border mx-1" />
 
-      <ToolbarButton icon={Minus} onClick={() => handleAction('hr')} title="Horizontal Rule" />
-      <ToolbarButton icon={Code} onClick={() => handleAction('code')} title="Code Block" />
-      <ToolbarButton icon={Terminal} onClick={() => handleAction('terminal')} title="Terminal Block" />
-      <ToolbarButton icon={AlertCircle} onClick={() => handleAction('alert')} title="Markdown Alert" />
+      {/* Group 4 */}
+      <ToolbarButton icon={Heading1} onClick={() => handleAction('h1')} title="Heading 1" />
+      <ToolbarButton icon={Heading2} onClick={() => handleAction('h2')} title="Heading 2" />
+      <ToolbarButton icon={Heading3} onClick={() => handleAction('h3')} title="Heading 3" />
+      <ToolbarButton icon={Heading4} onClick={() => handleAction('h4')} title="Heading 4" />
+      <ToolbarButton icon={Heading5} onClick={() => handleAction('h5')} title="Heading 5" />
+      <ToolbarButton icon={Heading6} onClick={() => handleAction('h6')} title="Heading 6" />
       <div className="w-px h-4 bg-border mx-1" />
 
-      <ToolbarButton icon={LinkIcon} onClick={() => setIsRefModalOpen(true)} title="Insert Reference" />
+      {/* Group 5 */}
+      <ToolbarButton icon={List} onClick={() => handleAction('ul')} title="Unordered List" />
+      <ToolbarButton icon={ListOrdered} onClick={() => handleAction('ol')} title="Ordered List" />
+      <ToolbarButton icon={Minus} onClick={() => handleAction('hr')} title="Horizontal Rule" />
+      <div className="w-px h-4 bg-border mx-1" />
+
+      {/* Group 6 */}
+      <ToolbarButton icon={LinkIcon} onClick={() => handleAction('link')} title="Insert Link" />
+      <ToolbarButton icon={BookOpen} onClick={() => setIsRefModalOpen(true)} title="Insert Reference/Footnote" />
       <ToolbarButton icon={ImageIcon} onClick={() => setIsImageModalOpen(true)} title="Insert Image" />
+      <ToolbarButton icon={Code} onClick={() => handleAction('code')} title="Code Block" />
+      <ToolbarButton icon={Terminal} onClick={() => handleAction('terminal')} title="Terminal Block" />
+      <ToolbarButton icon={Sigma} onClick={() => handleAction('math')} title="Insert Math Block" />
       <ToolbarButton icon={TableIcon} onClick={() => setIsTableModalOpen(true)} title="Insert Table" />
       <ToolbarButton icon={Clock} onClick={() => handleAction('date')} title="Insert Date & Time" />
       <ToolbarButton icon={Smile} onClick={() => setIsEmojiModalOpen(true)} title="Insert Emoji" />
+      <ToolbarButton icon={AlertCircle} onClick={() => handleAction('alert')} title="Markdown Alert" />
+      <div className="w-px h-4 bg-border mx-1" />
+      
+      {/* Group 7 */}
+      <ToolbarButton icon={Copyright} onClick={() => handleAction('copyright')} title="Insert Copyright" />
+      <ToolbarButton icon={FolderOpen} onClick={() => handleAction('import')} title="Import .md file" />
+      <ToolbarButton icon={Download} onClick={() => handleAction('export')} title="Export as .md" />
+      <ToolbarButton icon={Workflow} onClick={() => handleAction('mermaid')} title="Insert Mermaid Diagram" />
       <div className="w-px h-4 bg-border mx-1" />
 
       {/* View modes */}
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ml-auto flex items-center gap-1 shrink-0">
         <ToolbarButton icon={ZoomOut} onClick={() => setZoomLevel(z => Math.max(8, z - 2))} title="Zoom Out" />
         <span className="text-xs text-muted-foreground w-8 text-center">{zoomLevel}px</span>
         <ToolbarButton icon={ZoomIn} onClick={() => setZoomLevel(z => Math.min(32, z + 2))} title="Zoom In" />
         <div className="w-px h-4 bg-border mx-1" />
         
-        <ToolbarButton icon={Search} onClick={() => {
-          alert("Use Ctrl+F / Cmd+F to find within the editor!")
-        }} title="Find" />
+        <ToolbarButton icon={Search} onClick={() => alert("Use Ctrl+F / Cmd+F to find within the editor!")} title="Find" />
+        <ToolbarButton icon={HelpCircle} onClick={() => handleAction('help')} title="Help" />
+        <ToolbarButton icon={Info} onClick={() => handleAction('info')} title="Info" />
+        <div className="w-px h-4 bg-border mx-1" />
+
         <ToolbarButton icon={Focus} onClick={toggleZenMode} title={isZenMode ? "Exit Zen Mode" : "Zen Mode"} />
         <ToolbarButton icon={isFullscreen ? Minimize : Maximize} onClick={toggleFullscreen} title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"} />
       </div>
