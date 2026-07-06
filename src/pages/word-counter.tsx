@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next"
 import { ToolLayout } from "@/components/common/ToolLayout"
 import { usePersist } from "@/hooks/use-persist"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function WordCounterTool() {
+  const { t } = useTranslation()
   const [text, setText, clearText] = usePersist("tools-word-counter", "")
 
   const chars = text.length
@@ -18,16 +20,16 @@ export default function WordCounterTool() {
     >
       <div className="flex flex-col gap-6 h-full">
         <Textarea
-          placeholder="Type or paste your text here..."
+          placeholder={t('tools.word-counter.placeholder', "Type or paste your text here...")}
           value={text}
           onChange={(e) => setText(e.target.value)}
           className="flex-1 min-h-[300px] resize-none p-4 text-base"
         />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatBox label="Characters" value={chars} />
-          <StatBox label="Words" value={words} />
-          <StatBox label="Lines" value={lines} />
-          <StatBox label="Without Spaces" value={noSpaces} />
+          <StatBox label={t('tools.word-counter.characters', "Characters")} value={chars} />
+          <StatBox label={t('tools.word-counter.words', "Words")} value={words} />
+          <StatBox label={t('tools.word-counter.lines', "Lines")} value={lines} />
+          <StatBox label={t('tools.word-counter.noSpaces', "Without Spaces")} value={noSpaces} />
         </div>
       </div>
     </ToolLayout>

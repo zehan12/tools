@@ -29,11 +29,19 @@
   "tools": {
     "base64": {
       "title": "Base64 Decoder",
-      "description": "Decode Base64 encoded strings quickly and easily in your browser."
+      "description": "Decode Base64 encoded strings quickly and easily in your browser.",
+      "inputLabel": "Base64 Input",
+      "inputPlaceholder": "Paste Base64 to decode...",
+      "outputLabel": "Decoded Output",
+      "error": "Error decoding input: Invalid Base64"
     },
     "base64-encode": {
       "title": "Base64 Encoder",
-      "description": "Encode strings to Base64 format quickly and easily in your browser."
+      "description": "Encode strings to Base64 format quickly and easily in your browser.",
+      "inputLabel": "Input Text",
+      "inputPlaceholder": "Type text to encode...",
+      "outputLabel": "Base64 Output",
+      "error": "Error encoding input"
     },
     "jwt": {
       "title": "JWT Decoder / Encoder",
@@ -79,7 +87,17 @@
     },
     "word-counter": {
       "title": "Word Counter",
-      "description": "Count characters, words, sentences, and paragraphs in your text with real-time statistics."
+      "description": "Count characters, words, sentences, and paragraphs in your text with real-time statistics.",
+      "placeholder": "Type or paste your text here to count words, characters, and more...",
+      "characters": "Characters",
+      "words": "Words",
+      "sentences": "Sentences",
+      "paragraphs": "Paragraphs",
+      "readingTime": "Reading Time",
+      "approx": "~",
+      "min": "min",
+      "lines": "Lines",
+      "noSpaces": "Without Spaces"
     },
     "sql-formatter": {
       "title": "SQL Formatter",
@@ -87,7 +105,17 @@
     },
     "json-formatter": {
       "title": "JSON Formatter",
-      "description": "Format and prettify your JSON data instantly in your browser."
+      "description": "Format and prettify your JSON data instantly in your browser.",
+      "format": "Format",
+      "minify": "Minify",
+      "input": "Input JSON",
+      "output": "Formatted Output",
+      "placeholder": "Paste your JSON here...",
+      "invalid": "Invalid JSON",
+      "indent": "Indent:",
+      "spaces2": "2 Spaces",
+      "spaces4": "4 Spaces",
+      "rawJson": "Raw JSON"
     },
     "qr-code": {
       "title": "QR Code Generator",

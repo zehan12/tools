@@ -29,11 +29,19 @@
   "tools": {
     "base64": {
       "title": "Decodificador Base64",
-      "description": "Decodifica cadenas codificadas en Base64 de forma rápida y sencilla en tu navegador."
+      "description": "Decodifica cadenas codificadas en Base64 de forma rápida y sencilla en tu navegador.",
+      "inputLabel": "Entrada Base64",
+      "inputPlaceholder": "Pegue Base64 para decodificar...",
+      "outputLabel": "Salida decodificada",
+      "error": "Error al decodificar: Base64 no válido"
     },
     "base64-encode": {
       "title": "Codificador Base64",
-      "description": "Codifica cadenas a formato Base64 de forma rápida y sencilla en tu navegador."
+      "description": "Codifica cadenas a formato Base64 de forma rápida y sencilla en tu navegador.",
+      "inputLabel": "Texto de entrada",
+      "inputPlaceholder": "Escriba el texto para codificar...",
+      "outputLabel": "Salida Base64",
+      "error": "Error al codificar la entrada"
     },
     "jwt": {
       "title": "Decodificador / Codificador JWT",
@@ -79,7 +87,17 @@
     },
     "word-counter": {
       "title": "Contador de Palabras",
-      "description": "Cuenta caracteres, palabras, oraciones y párrafos."
+      "description": "Cuenta caracteres, palabras, oraciones y párrafos.",
+      "placeholder": "Escriba o pegue su texto aquí para contar palabras, caracteres y más...",
+      "characters": "Caracteres",
+      "words": "Palabras",
+      "sentences": "Oraciones",
+      "paragraphs": "Párrafos",
+      "readingTime": "Tiempo de lectura",
+      "approx": "~",
+      "min": "min",
+      "lines": "Líneas",
+      "noSpaces": "Sin espacios"
     },
     "sql-formatter": {
       "title": "Formateador SQL",
@@ -87,7 +105,17 @@
     },
     "json-formatter": {
       "title": "Formateador JSON",
-      "description": "Formatea datos JSON al instante."
+      "description": "Formatea datos JSON al instante.",
+      "format": "Formato",
+      "minify": "Minificar",
+      "input": "JSON de entrada",
+      "output": "Salida formateada",
+      "placeholder": "Pegue su JSON aquí...",
+      "invalid": "JSON inválido",
+      "indent": "Sangría:",
+      "spaces2": "2 espacios",
+      "spaces4": "4 espacios",
+      "rawJson": "JSON sin formato"
     },
     "qr-code": {
       "title": "Generador de Código QR",

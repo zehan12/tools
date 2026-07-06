@@ -29,11 +29,19 @@
   "tools": {
     "base64": {
       "title": "وحدة فك ترميز Base64",
-      "description": "قم بفك ترميز نصوص Base64 بسرعة وسهولة في متصفحك."
+      "description": "قم بفك ترميز نصوص Base64 بسرعة وسهولة في متصفحك.",
+      "inputLabel": "إدخال Base64",
+      "inputPlaceholder": "الصق Base64 لفك تشفيره...",
+      "outputLabel": "المخرجات المفككة",
+      "error": "خطأ في فك تشفير الإدخال: Base64 غير صالح"
     },
     "base64-encode": {
       "title": "مشفر Base64",
-      "description": "قم بتشفير النصوص إلى صيغة Base64 بسرعة وسهولة في متصفحك."
+      "description": "قم بتشفير النصوص إلى صيغة Base64 بسرعة وسهولة في متصفحك.",
+      "inputLabel": "نص الإدخال",
+      "inputPlaceholder": "اكتب النص لتشفيره...",
+      "outputLabel": "مخرجات Base64",
+      "error": "خطأ في تشفير الإدخال"
     },
     "jwt": {
       "title": "وحدة فك / تشفير JWT",
@@ -79,7 +87,17 @@
     },
     "word-counter": {
       "title": "عداد الكلمات",
-      "description": "عد الأحرف والكلمات والجمل والفقرات في النص الخاص بك."
+      "description": "عد الأحرف والكلمات والجمل والفقرات في النص الخاص بك.",
+      "placeholder": "اكتب أو الصق نصك هنا لعد الكلمات والأحرف والمزيد...",
+      "characters": "أحرف",
+      "words": "كلمات",
+      "sentences": "جمل",
+      "paragraphs": "فقرات",
+      "readingTime": "وقت القراءة",
+      "approx": "~",
+      "min": "دقيقة",
+      "lines": "الأسطر",
+      "noSpaces": "بدون مسافات"
     },
     "sql-formatter": {
       "title": "منسق SQL",
@@ -87,7 +105,17 @@
     },
     "json-formatter": {
       "title": "منسق JSON",
-      "description": "قم بتنسيق وتجميل بيانات JSON الخاصة بك على الفور."
+      "description": "قم بتنسيق وتجميل بيانات JSON الخاصة بك على الفور.",
+      "format": "تنسيق",
+      "minify": "تصغير",
+      "input": "إدخال JSON",
+      "output": "المخرجات المنسقة",
+      "placeholder": "الصق JSON هنا...",
+      "invalid": "JSON غير صالح",
+      "indent": "مسافة البادئة:",
+      "spaces2": "مساحتان",
+      "spaces4": "4 مسافات",
+      "rawJson": "JSON الخام"
     },
     "qr-code": {
       "title": "مولد رمز الاستجابة السريعة (QR)",
