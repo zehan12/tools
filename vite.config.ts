@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import path from "path"
 import tailwindcss from '@tailwindcss/vite'
@@ -8,16 +8,19 @@ import Sitemap from 'vite-plugin-sitemap'
 import { Tools } from './src/types/tools.ts'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    tailwindcss(),
-    react(),
-    babel({ presets: [reactCompilerPreset()] }),
-    Sitemap({
-      hostname: 'https://tools.zehan.com',
-      dynamicRoutes: Object.values(Tools).map(tool => `/${tool}`),
-      generateRobotsTxt: false
-    }),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  
+  return {
+    plugins: [
+      tailwindcss(),
+      react(),
+      babel({ presets: [reactCompilerPreset()] }),
+      Sitemap({
+        hostname: env.VITE_DOMAIN || 'https://tools.zehan.com',
+        dynamicRoutes: Object.values(Tools).map(tool => `/${tool}`),
+        generateRobotsTxt: false
+      }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
@@ -47,4 +50,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  }
 })
