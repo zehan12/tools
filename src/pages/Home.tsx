@@ -23,9 +23,9 @@ export function Home() {
   })
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full flex flex-col">
       <SEO />
-      <div className="space-y-6">
+      <div className="space-y-6 flex-1 flex flex-col">
         <div className="space-y-2">
           <h1 className="text-xl font-medium tracking-wider dark:text-gray-100">{t('app.title')}</h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-xl mt-2">
@@ -95,7 +95,7 @@ export function Home() {
           </div>
         )}
 
-        <div className="flex items-center gap-6 pt-4">
+        <div className="flex items-center gap-6 pt-8 mt-auto pb-2">
           <a
             href="https://github.com/zehan12/tools"
             target="_blank"
