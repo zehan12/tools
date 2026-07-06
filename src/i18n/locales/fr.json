@@ -7,7 +7,8 @@
     "noResults": "Aucun résultat trouvé.",
     "searchTools": "Outils de recherche",
     "clearData": "Effacer les données sauvegardées",
-    "skipToContent": "Passer au contenu principal"
+    "skipToContent": "Passer au contenu principal",
+    "all": "Tous"
   },
   "sidebar": {
     "by": "par",
