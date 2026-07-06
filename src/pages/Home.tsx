@@ -1,17 +1,17 @@
-import { tools } from "@/config/tools"
-import { Icon } from "@iconify/react"
-import { Link } from "react-router-dom"
-import { SEO } from "@/components/common/SEO"
-import { useTranslation } from "react-i18next"
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import { Icon } from "@iconify/react"
+import { tools } from "@/config/tools"
 import { Category } from "@/types/tools"
+import { SEO } from "@/components/common/SEO"
 
 export function Home() {
   const { t } = useTranslation()
   const [search, setSearch] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState<string>("All")
+  const [selectedCategory, setSelectedCategory] = useState<Category | "All">("All")
 
-  const categories = ["All", ...Object.values(Category)]
+  const categories: (Category | "All")[] = ["All", ...(Object.values(Category) as Category[])]
 
   const filteredTools = tools.filter(tool => {
     const matchesCategory = selectedCategory === "All" || tool.category === selectedCategory
