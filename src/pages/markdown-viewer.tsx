@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { ToolLayout } from "@/components/common/ToolLayout"
 import { usePersist } from "@/hooks/use-persist"
@@ -36,10 +37,19 @@ function greet() {
 export default function MarkdownViewerTool() {
   const { t } = useTranslation()
   const [input, setInput, clearInput] = usePersist("tools-markdown-viewer", defaultMarkdown)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  // Auto-resize textarea so the ScrollArea component handles the scrolling
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px"
+    }
+  }, [input])
 
   return (
-    <ToolLayout
-      title="Markdown Viewer"
+    <ToolLayout 
+      title="Markdown Viewer" 
       description="Preview markdown with live rendering, syntax highlighting, and standard GitHub-flavored Markdown support."
       onClear={clearInput}
     >
@@ -47,13 +57,14 @@ export default function MarkdownViewerTool() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[calc(100vh-14rem)] min-h-[500px]">
           <div className="flex flex-col gap-2 h-full min-h-0">
             <Label htmlFor="input-markdown">{t('tools.markdown-viewer.raw', "Raw Markdown")}</Label>
-            <ScrollArea className="flex-1 min-h-0 border outline-border">
+            <ScrollArea className="flex-1 min-h-0 border outline-border bg-white dark:bg-[#111]">
               <Textarea
+                ref={textareaRef}
                 id="input-markdown"
                 placeholder="# Type your markdown here..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="w-full h-full min-h-full resize-none font-mono text-sm border-0 focus-visible:ring-0 rounded-none shadow-none"
+                className="w-full min-h-full resize-none font-mono text-sm border-0 focus-visible:ring-0 rounded-none shadow-none overflow-hidden"
               />
             </ScrollArea>
           </div>
