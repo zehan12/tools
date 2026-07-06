@@ -31,6 +31,7 @@ export const Tools = {
   BountyCalculator: "bounty-calculator",
   CvssCalculator: "cvss-calculator",
   MarkdownViewer: "markdown-viewer",
+  Whiteboard: "whiteboard",
 } as const;
 export type Tools = typeof Tools[keyof typeof Tools];
 

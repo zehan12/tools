@@ -162,5 +162,13 @@ export const tools: ToolDef[] = [
     description: "Preview markdown with live rendering, syntax highlighting, and standard GitHub-flavored Markdown support.",
     icon: "carbon:logo-github",
     category: Category.Dev,
+  },
+  {
+    slug: Tools.Whiteboard,
+    title: "Whiteboard",
+    component: lazy(() => import("@/pages/whiteboard")),
+    description: "A virtual whiteboard for sketching hand-drawn like diagrams.",
+    icon: "carbon:draw",
+    category: Category.Dev,
   }
 ];
