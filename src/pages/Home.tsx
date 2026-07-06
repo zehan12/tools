@@ -10,7 +10,7 @@ export function Home() {
   const { t } = useTranslation()
   const [search, setSearch] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
-  
+
   const categories = ["All", ...Object.values(Category)]
 
   const filteredTools = tools.filter(tool => {
@@ -36,15 +36,15 @@ export function Home() {
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div className="relative w-full sm:max-w-xs flex items-center">
             <Icon icon="ph:magnifying-glass" className="absolute left-3 text-muted-foreground" />
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder={t('app.searchPlaceholder', "Search tools...")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full h-10 pl-9 pr-8 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             />
             {search && (
-              <button 
+              <button
                 onClick={() => setSearch("")}
                 className="absolute right-3 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Clear search"
@@ -53,7 +53,7 @@ export function Home() {
               </button>
             )}
           </div>
-          
+
           <div className="flex gap-2 w-full overflow-x-auto pb-2 sm:pb-0 scrollbar-none items-center">
             {categories.map(cat => (
               <button
@@ -76,7 +76,7 @@ export function Home() {
             <p>{t('app.noResults', "No results found.")}</p>
           </div>
         ) : (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-4 gap-4">
             {filteredTools.map((tool) => (
               <Link
                 key={tool.slug}
