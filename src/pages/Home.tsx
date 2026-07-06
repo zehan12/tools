@@ -54,14 +54,17 @@ export function Home() {
             )}
           </div>
           
-          <div className="flex gap-2 w-full overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
+          <div className="flex gap-2 w-full overflow-x-auto pb-2 sm:pb-0 scrollbar-none items-center">
             {categories.map(cat => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${selectedCategory === cat ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
+                onClick={() => setSelectedCategory(selectedCategory === cat ? "All" : cat)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors flex items-center gap-1 ${selectedCategory === cat ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}
               >
                 {cat === "All" ? t('app.all', "All") : t(`categories.${cat}`, cat.charAt(0).toUpperCase() + cat.slice(1))}
+                {selectedCategory === cat && cat !== "All" && (
+                  <Icon icon="ph:x" className="size-3" />
+                )}
               </button>
             ))}
           </div>
