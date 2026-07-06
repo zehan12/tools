@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   Strikethrough,
   Quote,
@@ -18,7 +18,13 @@ import {
   Minimize,
   Focus,
   Search,
-  Type
+  Type,
+  Undo,
+  Redo,
+  FolderOpen,
+  Download,
+  ZoomIn,
+  ZoomOut
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -31,6 +37,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useMarkdownViewerStore } from '@/store/markdown-viewer'
+import EmojiPicker from 'emoji-picker-react'
 
 interface MarkdownToolbarProps {
   textareaRef: React.RefObject<HTMLTextAreaElement | null>
@@ -39,8 +46,10 @@ interface MarkdownToolbarProps {
 }
 
 export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolbarProps) {
-  const { isZenMode, isFullscreen, toggleZenMode, toggleFullscreen } = useMarkdownViewerStore()
+  const { isZenMode, isFullscreen, zoomLevel, toggleZenMode, toggleFullscreen, setZoomLevel } = useMarkdownViewerStore()
   
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   // Modals state
   const [isRefModalOpen, setIsRefModalOpen] = useState(false)
   const [refId, setRefId] = useState('')
@@ -89,7 +98,44 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
       case 'terminal': insertText('```bash\n', '\n```'); break;
       case 'alert': insertText('> [!NOTE]\n> ', ''); break;
       case 'date': insertText(new Date().toLocaleString(), ''); break;
+      case 'undo':
+        textareaRef.current?.focus();
+        document.execCommand('undo');
+        break;
+      case 'redo':
+        textareaRef.current?.focus();
+        document.execCommand('redo');
+        break;
+      case 'import':
+        fileInputRef.current?.click();
+        break;
+      case 'export':
+        const blob = new Blob([value], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'document.md';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        break;
     }
+  }
+
+  const handleFileImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const text = e.target?.result
+      if (typeof text === 'string') {
+        onChange(text)
+      }
+    }
+    reader.readAsText(file)
+    // reset input
+    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
   const handleInsertRef = () => {
@@ -143,10 +189,18 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
     </Button>
   )
 
-  const emojis = ['😀', '😂', '🥰', '😎', '🤔', '😭', '👍', '🙏', '🔥', '✨', '🎉', '🚀', '💻', '🐛', '✅', '❌']
-
   return (
     <div className="flex flex-wrap items-center gap-1 p-1 bg-muted/50 border-b border-border rounded-t-md">
+      <input type="file" ref={fileInputRef} className="hidden" accept=".md,.txt,text/markdown,text/plain" onChange={handleFileImport} />
+      
+      <ToolbarButton icon={Undo} onClick={() => handleAction('undo')} title="Undo (Ctrl+Z)" />
+      <ToolbarButton icon={Redo} onClick={() => handleAction('redo')} title="Redo (Ctrl+Y)" />
+      <div className="w-px h-4 bg-border mx-1" />
+
+      <ToolbarButton icon={FolderOpen} onClick={() => handleAction('import')} title="Import .md file" />
+      <ToolbarButton icon={Download} onClick={() => handleAction('export')} title="Export as .md" />
+      <div className="w-px h-4 bg-border mx-1" />
+
       <ToolbarButton icon={Strikethrough} onClick={() => handleAction('strikethrough')} title="Strikethrough" />
       <ToolbarButton icon={Quote} onClick={() => handleAction('blockquote')} title="Blockquote" />
       <div className="w-px h-4 bg-border mx-1" />
@@ -172,9 +226,12 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
 
       {/* View modes */}
       <div className="ml-auto flex items-center gap-1">
+        <ToolbarButton icon={ZoomOut} onClick={() => setZoomLevel(z => Math.max(8, z - 2))} title="Zoom Out" />
+        <span className="text-xs text-muted-foreground w-8 text-center">{zoomLevel}px</span>
+        <ToolbarButton icon={ZoomIn} onClick={() => setZoomLevel(z => Math.min(32, z + 2))} title="Zoom In" />
+        <div className="w-px h-4 bg-border mx-1" />
+        
         <ToolbarButton icon={Search} onClick={() => {
-          // Native browser find is usually Ctrl+F, but we can just focus the textarea and let them use it.
-          // For a robust find/replace, we would need a dedicated state, but for now we will alert.
           alert("Use Ctrl+F / Cmd+F to find within the editor!")
         }} title="Find" />
         <ToolbarButton icon={Focus} onClick={toggleZenMode} title={isZenMode ? "Exit Zen Mode" : "Zen Mode"} />
@@ -219,16 +276,14 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
       </Dialog>
 
       <Dialog open={isEmojiModalOpen} onOpenChange={setIsEmojiModalOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader><DialogTitle>Insert Emoji</DialogTitle></DialogHeader>
-          <div className="grid grid-cols-8 gap-2 py-4">
-            {emojis.map(emoji => (
-              <Button key={emoji} variant="outline" className="h-10 w-10 text-xl p-0" onClick={() => {
-                insertText(emoji, '')
-                setIsEmojiModalOpen(false)
-              }}>{emoji}</Button>
-            ))}
-          </div>
+        <DialogContent className="p-0 border-none bg-transparent shadow-none flex justify-center items-center [&>button]:hidden sm:max-w-fit">
+          <EmojiPicker 
+            onEmojiClick={(emojiData) => {
+              insertText(emojiData.emoji, '')
+              setIsEmojiModalOpen(false)
+            }}
+            theme={'auto' as any}
+          />
         </DialogContent>
       </Dialog>
     </div>

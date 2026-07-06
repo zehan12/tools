@@ -41,7 +41,7 @@ export default function MarkdownViewerTool() {
   const [input, setInput, clearInput] = usePersist("tools-markdown-viewer", defaultMarkdown)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   
-  const { isZenMode, isFullscreen } = useMarkdownViewerStore()
+  const { isZenMode, isFullscreen, zoomLevel } = useMarkdownViewerStore()
 
   // Auto-resize textarea so the ScrollArea component handles the scrolling
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function MarkdownViewerTool() {
       textareaRef.current.style.height = "auto"
       textareaRef.current.style.height = textareaRef.current.scrollHeight + "px"
     }
-  }, [input])
+  }, [input, zoomLevel])
 
   const content = (
     <div className="flex flex-col h-full gap-4">
@@ -67,7 +67,8 @@ export default function MarkdownViewerTool() {
               placeholder="# Type your markdown here..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="w-full min-h-full resize-none font-mono text-sm border-0 focus-visible:ring-0 rounded-none shadow-none overflow-hidden p-4"
+              style={{ fontSize: `${zoomLevel}px`, lineHeight: 1.5 }}
+              className="w-full min-h-full resize-none font-mono border-0 focus-visible:ring-0 rounded-none shadow-none overflow-hidden p-4"
             />
           </ScrollArea>
         </div>
@@ -76,7 +77,7 @@ export default function MarkdownViewerTool() {
           <div className="flex flex-col gap-2 h-full min-h-0">
             <Label>{t('tools.markdown-viewer.preview', "Preview")}</Label>
             <ScrollArea className="flex-1 bg-card border rounded-md p-4 lg:p-6 shadow-sm min-h-0">
-              <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
+              <article className="prose dark:prose-invert max-w-none" style={{ fontSize: `${zoomLevel}px` }}>
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
