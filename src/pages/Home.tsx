@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react"
 import { tools } from "@/config/tools"
 import { Category } from "@/types/tools"
 import { SEO } from "@/components/common/SEO"
+import { APP_CONFIG } from "@/constants"
 
 export function Home() {
   const { t } = useTranslation()
@@ -97,7 +98,7 @@ export function Home() {
 
         <div className="flex items-center gap-6 pt-8 mt-auto pb-2">
           <a
-            href="https://github.com/zehan12/tools"
+            href={APP_CONFIG.GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors"

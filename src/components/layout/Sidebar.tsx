@@ -5,6 +5,7 @@ import { Category } from "@/types/tools"
 import { Icon } from "@iconify/react"
 import { useTranslation } from "react-i18next"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { APP_CONFIG } from "@/constants"
 
 const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
@@ -60,7 +61,7 @@ export function Sidebar() {
           </div>
         </div>
         <div className="flex items-center gap-2 text-xs tracking-wide text-gray-600 mb-4 mt-2 shrink-0">
-          <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" href="https://zehan">zehan</a></span>
+          <span>{t('sidebar.by')} <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" rel="noopener noreferrer" href={APP_CONFIG.GITHUB_URL}>{APP_CONFIG.AUTHOR_NAME}</a></span>
         </div>
 
         <button
@@ -102,7 +103,7 @@ export function Sidebar() {
           ))}
         </nav>
         <div className="mt-4 pt-4 border-t border-border shrink-0">
-          <span className="text-[9px] opacity-70 text-gray-400 dark:text-gray-500 block text-center">Inspired by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" rel="noopener noreferrer" href="https://tools-shivam-dev.vercel.app/">shivam.dev</a></span>
+          <span className="text-[9px] opacity-70 text-gray-400 dark:text-gray-500 block text-center">Inspired by <a className="underline hover:text-gray-900 dark:hover:text-gray-100 transition-colors" target="_blank" rel="noopener noreferrer" href={APP_CONFIG.INSPIRED_BY_URL}>shivam.dev</a></span>
         </div>
       </div>
     </aside>
