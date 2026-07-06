@@ -44,19 +44,19 @@ export default function MarkdownViewerTool() {
     >
       <div className="flex flex-col h-full gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[calc(100vh-14rem)] min-h-[500px]">
-          <div className="flex flex-col gap-2 h-full">
+          <div className="flex flex-col gap-2 h-full min-h-0">
             <Label htmlFor="input-markdown">{t('tools.markdown-viewer.raw', "Raw Markdown")}</Label>
             <Textarea
               id="input-markdown"
               placeholder="# Type your markdown here..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 resize-none font-mono text-sm"
+              className="flex-1 resize-none font-mono text-sm min-h-0"
             />
           </div>
-          <div className="flex flex-col gap-2 h-full">
+          <div className="flex flex-col gap-2 h-full min-h-0">
             <Label>{t('tools.markdown-viewer.preview', "Preview")}</Label>
-            <div className="flex-1 overflow-auto bg-card border rounded-md p-4 lg:p-6 shadow-sm">
+            <div className="flex-1 overflow-auto bg-card border rounded-md p-4 lg:p-6 shadow-sm min-h-0">
               <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
