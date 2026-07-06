@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import { SEO } from "./SEO"
 import { useTranslation } from "react-i18next"
+import { useLocation } from "react-router-dom"
 
 interface ToolLayoutProps {
   title: string
@@ -12,16 +13,22 @@ interface ToolLayoutProps {
 
 export function ToolLayout({ title, description, children, onClear, maxWidth = "w-full" }: ToolLayoutProps) {
   const { t } = useTranslation()
+  const location = useLocation()
+  
+  const slug = location.pathname.split('/').filter(Boolean).pop()
+  const displayTitle = slug ? t(`tools.${slug}.title`, title) : title
+  const displayDescription = slug ? t(`tools.${slug}.description`, description) : description
+
   return (
     <div className={`${maxWidth} flex flex-col grow gap-6 justify-between`}>
-      <SEO title={title} description={description} />
+      <SEO title={displayTitle} description={displayDescription} />
       <section className="space-y-6 grow flex flex-col">
         <div>
           <h1 className="text-xl font-medium tracking-wider truncate">
-            {title}
+            {displayTitle}
           </h1>
           <div className="text-gray-600 dark:text-gray-400 max-w-xl mt-2">
-            <p>{description}</p>
+            <p>{displayDescription}</p>
           </div>
         </div>
         {children}
