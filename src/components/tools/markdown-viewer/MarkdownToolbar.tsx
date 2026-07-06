@@ -59,8 +59,11 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useMarkdownViewerStore } from '@/store/markdown-viewer'
+import { useTheme } from '@/providers/theme-provider'
 import EmojiPicker from 'emoji-picker-react'
+import { toast } from 'sonner'
 
 interface MarkdownToolbarProps {
   textareaRef: React.RefObject<HTMLTextAreaElement | null>
@@ -70,6 +73,7 @@ interface MarkdownToolbarProps {
 
 export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolbarProps) {
   const { viewMode, isFullscreen, zoomLevel, setViewMode, toggleFullscreen, setZoomLevel } = useMarkdownViewerStore()
+  const { theme } = useTheme()
   
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -88,6 +92,9 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
   const [tableCols, setTableCols] = useState(3)
 
   const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
+  
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false)
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
 
   const insertText = (before: string, after: string = '') => {
     if (!textareaRef.current) return
@@ -182,10 +189,10 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
         URL.revokeObjectURL(url);
         break;
       case 'help':
-        alert("Markdown formatting help:\\n**Bold**\\n*Italic*\\n~~Strikethrough~~\\n> Blockquote\\n# H1");
+        setIsHelpModalOpen(true);
         break;
       case 'info':
-        alert("Markdown Viewer Tool\\nBuilt with React, Tailwind CSS, and Shadcn UI.");
+        setIsInfoModalOpen(true);
         break;
     }
   }
@@ -251,9 +258,14 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
   }
 
   const ToolbarButton = ({ icon: Icon, onClick, title, active = false }: { icon: any, onClick: () => void, title: string, active?: boolean }) => (
-    <Button variant="ghost" size="icon" className={`h-8 w-8 ${active ? 'bg-muted text-primary' : 'text-muted-foreground hover:text-foreground'}`} onClick={onClick} title={title}>
-      <Icon className="h-4 w-4" />
-    </Button>
+    <Tooltip>
+      <TooltipTrigger render={<Button variant="ghost" size="icon" className={`h-8 w-8 ${active ? 'bg-muted text-primary' : 'text-muted-foreground hover:text-foreground'}`} onClick={onClick} aria-label={title} />}>
+        <Icon className="h-4 w-4" />
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>{title}</p>
+      </TooltipContent>
+    </Tooltip>
   )
 
   return (
@@ -325,7 +337,7 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
         <ToolbarButton icon={ZoomIn} onClick={() => setZoomLevel(z => Math.min(32, z + 2))} title="Zoom In" />
         <div className="w-px h-4 bg-border mx-1" />
         
-        <ToolbarButton icon={Search} onClick={() => alert("Use Ctrl+F / Cmd+F to find within the editor!")} title="Find" />
+        <ToolbarButton icon={Search} onClick={() => toast("Use Ctrl+F / Cmd+F to find within the editor!")} title="Find" />
         <ToolbarButton icon={HelpCircle} onClick={() => handleAction('help')} title="Help" />
         <ToolbarButton icon={Info} onClick={() => handleAction('info')} title="Info" />
         <div className="w-px h-4 bg-border mx-1" />
@@ -377,14 +389,112 @@ export function MarkdownToolbar({ textareaRef, value, onChange }: MarkdownToolba
 
       <Dialog open={isEmojiModalOpen} onOpenChange={setIsEmojiModalOpen}>
         <DialogContent className="p-0 border-none bg-transparent shadow-none flex justify-center items-center [&>button]:hidden sm:max-w-fit">
-          <ScrollArea className="max-h-[80vh] overflow-auto flex rounded-lg">
+          <div className="flex rounded-lg overflow-hidden [&_.epr-body::-webkit-scrollbar]:w-2 [&_.epr-body::-webkit-scrollbar-thumb]:rounded-full [&_.epr-body::-webkit-scrollbar-thumb]:bg-border [&_.epr-body::-webkit-scrollbar-track]:bg-transparent [&_.epr-body::-webkit-scrollbar-thumb:hover]:bg-muted-foreground/50">
             <EmojiPicker 
               onEmojiClick={(emojiData) => {
                 insertText(emojiData.emoji, '')
                 setIsEmojiModalOpen(false)
               }}
-              theme={'auto' as any}
+              theme={(theme === 'dark' ? 'dark' : (theme === 'light' ? 'light' : 'auto')) as any}
             />
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isHelpModalOpen} onOpenChange={setIsHelpModalOpen}>
+        <DialogContent className="sm:max-w-4xl w-[90vw] max-h-[90vh] flex flex-col p-0">
+          <DialogHeader className="p-6 pb-4 border-b border-border">
+            <DialogTitle>Markdown Viewer Help</DialogTitle>
+          </DialogHeader>
+          <ScrollArea className="flex-1">
+            <div className="space-y-6 text-sm p-6">
+              <div>
+                <h3 className="font-semibold text-base mb-2">Application shortcuts</h3>
+                <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                  <li>Use the view buttons in the toolbar to switch between Editor, Split, and Preview modes.</li>
+                  <li>Sync scrolling is available in Split view to keep the editor and preview aligned.</li>
+                  <li>Import, Export, Copy, Share, and Theme toggle actions are always available in the header toolbar.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold text-base mb-2">Toolbar descriptions</h3>
+                <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                  <li>Undo/Redo and Clear Formatting help you manage editing changes quickly.</li>
+                  <li>Text styling tools cover bold, italic, strikethrough, quotes, headings, and list formatting.</li>
+                  <li>Insert helpers add links, images, code blocks, tables, emojis, symbols, and alerts.</li>
+                  <li>Use Fullscreen, Find & Replace, Help, and About Markdown for focused editing.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold text-base mb-2">Markdown tips</h3>
+                <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                  <li>Create headings with #, ##, and ### prefixes.</li>
+                  <li>Emphasize text with **bold**, *italic*, or ~~strikethrough~~.</li>
+                  <li>Use - or 1. to build lists, and triple backticks for code blocks.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold text-base mb-2">Keyboard shortcuts</h3>
+                <ul className="list-disc pl-5 space-y-2 text-muted-foreground mt-2">
+                  <li className="flex items-center gap-2"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">Ctrl</kbd> / <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">⌘</kbd> + <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">Z</kbd> — Undo</li>
+                  <li className="flex items-center gap-2"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">Ctrl</kbd> / <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">⌘</kbd> + <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">Shift</kbd> + <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">Z</kbd> — Redo</li>
+                  <li className="flex items-center gap-2"><kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">Ctrl</kbd> / <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">⌘</kbd> + <kbd className="bg-muted px-1.5 py-0.5 rounded text-xs border border-border">F</kbd> — Open Find & Replace</li>
+                </ul>
+              </div>
+            </div>
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isInfoModalOpen} onOpenChange={setIsInfoModalOpen}>
+        <DialogContent className="sm:max-w-3xl w-[90vw] max-h-[90vh] flex flex-col p-0">
+          <DialogHeader className="p-6 pb-4 border-b border-border">
+            <DialogTitle>About Markdown</DialogTitle>
+          </DialogHeader>
+          <ScrollArea className="flex-1">
+            <div className="space-y-6 text-sm p-6">
+              <div className="flex items-start gap-4">
+                <div className="bg-foreground text-background font-bold text-3xl w-16 h-16 rounded-xl flex items-center justify-center shrink-0">
+                  M
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg leading-none">Markdown Viewer</h3>
+                  <p className="text-muted-foreground mt-2">
+                    A browser-based Markdown editor, viewer, and reader for opening .md files, split-screen live preview, GFM, sync scroll, diagrams, math, syntax highlighting, and export tools.
+                  </p>
+                  <p className="text-muted-foreground text-xs mt-2">Version 3.9.0 • Apache License 2.0 • Open source</p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-base mb-3">Open-source links</h3>
+                <ul className="list-disc pl-5 space-y-2 text-blue-500 hover:[&_a]:underline">
+                  <li><a href="#">Apache License 2.0</a></li>
+                  <li><a href="#">GitHub Repository</a></li>
+                  <li><a href="#">Contribution Guide</a></li>
+                  <li><a href="#">Report an Issue</a></li>
+                  <li><a href="#">Community & Support</a></li>
+                </ul>
+                <p className="text-muted-foreground text-xs mt-3">For feature requests, open a GitHub issue or start a discussion so the community can weigh in.</p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-base mb-3">Markdown resources</h3>
+                <ul className="list-disc pl-5 space-y-2 text-blue-500 hover:[&_a]:underline">
+                  <li><a href="#">Markdown syntax reference</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="font-semibold text-base mb-3">Technology stack</h3>
+                <div className="flex flex-wrap gap-2">
+                  <span className="bg-muted px-2.5 py-1 rounded-md text-xs font-medium border border-border">React</span>
+                  <span className="bg-muted px-2.5 py-1 rounded-md text-xs font-medium border border-border">Tailwind CSS</span>
+                  <span className="bg-muted px-2.5 py-1 rounded-md text-xs font-medium border border-border">Shadcn UI</span>
+                  <span className="bg-muted px-2.5 py-1 rounded-md text-xs font-medium border border-border">React Markdown</span>
+                </div>
+              </div>
+            </div>
           </ScrollArea>
         </DialogContent>
       </Dialog>
