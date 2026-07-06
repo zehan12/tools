@@ -83,7 +83,14 @@
     },
     "diff": {
       "title": "Text Diff",
-      "description": "Compare two texts and see their differences highlighted, with support for character, word, and line-based diffing."
+      "description": "Compare two texts and see their differences highlighted, with support for character, word, and line-based diffing.",
+      "mode": "Diff Mode",
+      "chars": "Characters",
+      "words": "Words",
+      "lines": "Lines",
+      "original": "Original Text",
+      "modified": "Modified Text",
+      "differenceView": "Difference View"
     },
     "word-counter": {
       "title": "Word Counter",
@@ -101,7 +108,13 @@
     },
     "sql-formatter": {
       "title": "SQL Formatter",
-      "description": "Format and beautify SQL queries with syntax highlighting."
+      "description": "Format and beautify SQL queries with syntax highlighting.",
+      "dialect": "Dialect:",
+      "selectDialect": "Select dialect",
+      "sql": "Standard SQL",
+      "rawSql": "Raw SQL",
+      "output": "Formatted Output",
+      "error": "Error formatting SQL"
     },
     "json-formatter": {
       "title": "JSON Formatter",

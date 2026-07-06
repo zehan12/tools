@@ -83,7 +83,14 @@
     },
     "diff": {
       "title": "Différence de Texte",
-      "description": "Comparez deux textes et voyez leurs différences en surbrillance."
+      "description": "Comparez deux textes et voyez leurs différences en surbrillance.",
+      "mode": "Mode de différence",
+      "chars": "Caractères",
+      "words": "Mots",
+      "lines": "Lignes",
+      "original": "Texte original",
+      "modified": "Texte modifié",
+      "differenceView": "Vue des différences"
     },
     "word-counter": {
       "title": "Compteur de Mots",
@@ -101,7 +108,13 @@
     },
     "sql-formatter": {
       "title": "Formateur SQL",
-      "description": "Formatez et embellissez les requêtes SQL."
+      "description": "Formatez et embellissez les requêtes SQL.",
+      "dialect": "Dialecte:",
+      "selectDialect": "Sélectionner le dialecte",
+      "sql": "SQL standard",
+      "rawSql": "SQL brut",
+      "output": "Sortie formatée",
+      "error": "Erreur de formatage SQL"
     },
     "json-formatter": {
       "title": "Formateur JSON",

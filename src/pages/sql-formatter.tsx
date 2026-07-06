@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { ToolLayout } from "@/components/common/ToolLayout"
 import { usePersist } from "@/hooks/use-persist"
 import { Textarea } from "@/components/ui/textarea"
@@ -7,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { format } from "sql-formatter"
 
 export default function SqlFormatterTool() {
+  const { t } = useTranslation()
   const [input, setInput, clearInput] = usePersist("tools-sql-formatter", "")
   const [dialect, setDialect] = useState("postgresql")
   
@@ -16,7 +18,7 @@ export default function SqlFormatterTool() {
       output = format(input, { language: dialect as any, tabWidth: 2 })
     }
   } catch (e: any) {
-    output = `Error formatting SQL:\n${e.message}`
+    output = `${t('tools.sql-formatter.error', "Error formatting SQL")}:\n${e.message}`
   }
 
   return (
@@ -27,14 +29,14 @@ export default function SqlFormatterTool() {
     >
       <div className="flex flex-col h-full gap-4">
         <div className="flex items-center gap-2">
-          <Label>Dialect:</Label>
+          <Label>{t('tools.sql-formatter.dialect', "Dialect:")}</Label>
           <div className="w-48">
             <Select value={dialect} onValueChange={(val: any) => setDialect(val)}>
               <SelectTrigger>
-                <SelectValue placeholder="Select dialect" />
+                <SelectValue placeholder={t('tools.sql-formatter.selectDialect', "Select dialect")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="sql">Standard SQL</SelectItem>
+                <SelectItem value="sql">{t('tools.sql-formatter.sql', "Standard SQL")}</SelectItem>
                 <SelectItem value="postgresql">PostgreSQL</SelectItem>
                 <SelectItem value="mysql">MySQL</SelectItem>
                 <SelectItem value="mariadb">MariaDB</SelectItem>
@@ -45,7 +47,7 @@ export default function SqlFormatterTool() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[calc(100vh-16rem)] min-h-[400px]">
           <div className="flex flex-col gap-2 h-full">
-            <Label htmlFor="input-sql">Raw SQL</Label>
+            <Label htmlFor="input-sql">{t('tools.sql-formatter.rawSql', "Raw SQL")}</Label>
             <Textarea
               id="input-sql"
               placeholder="SELECT * FROM users WHERE active = true"
@@ -55,7 +57,7 @@ export default function SqlFormatterTool() {
             />
           </div>
           <div className="flex flex-col gap-2 h-full">
-            <Label htmlFor="output-sql">Formatted Output</Label>
+            <Label htmlFor="output-sql">{t('tools.sql-formatter.output', "Formatted Output")}</Label>
             <Textarea
               id="output-sql"
               readOnly

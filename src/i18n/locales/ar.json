@@ -83,7 +83,14 @@
     },
     "diff": {
       "title": "مقارنة النصوص",
-      "description": "قارن نصين وشاهد الاختلافات بينهما مبرزة."
+      "description": "قارن نصين وشاهد الاختلافات بينهما مبرزة.",
+      "mode": "وضع المقارنة",
+      "chars": "أحرف",
+      "words": "كلمات",
+      "lines": "أسطر",
+      "original": "النص الأصلي",
+      "modified": "النص المعدل",
+      "differenceView": "عرض الاختلاف"
     },
     "word-counter": {
       "title": "عداد الكلمات",
@@ -101,7 +108,13 @@
     },
     "sql-formatter": {
       "title": "منسق SQL",
-      "description": "قم بتنسيق وتجميل استعلامات SQL مع إبراز بناء الجملة."
+      "description": "قم بتنسيق وتجميل استعلامات SQL مع إبراز بناء الجملة.",
+      "dialect": "اللهجة:",
+      "selectDialect": "اختر اللهجة",
+      "sql": "SQL القياسي",
+      "rawSql": "SQL الخام",
+      "output": "المخرجات المنسقة",
+      "error": "خطأ في تنسيق SQL"
     },
     "json-formatter": {
       "title": "منسق JSON",
