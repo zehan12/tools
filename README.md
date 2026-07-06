@@ -1,34 +1,63 @@
-# React + TypeScript + Vite
+# Developer Tools Collection
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A comprehensive, blazingly fast suite of developer tools built to run entirely in your browser. Engineered with a modern web stack, this platform provides offline-ready, privacy-first utilities for encoding, formatting, generating, and visualizing code and text—all wrapped in a clean, minimalist, dark-mode-first UI.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+*   **100% Client-Side:** No server communication. Your data never leaves your browser, ensuring maximum privacy and instant feedback.
+*   **Progressive Web App (PWA):** Installable on any device. Works offline seamlessly once cached.
+*   **Modern Tech Stack:** Built with React 19, Vite, and Tailwind CSS v4.
+*   **Glassmorphic & Brutalist UI:** Styled using `shadcn/ui` and custom glassmorphism effects for a premium aesthetic.
 
-## React Compiler
+## 🧰 Available Tools
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+This collection is actively growing. Current built-in tools include:
 
-Note: This will impact Vite dev & build performances.
+*   **🎨 Whiteboard:** A native integration of Excalidraw for fast, hand-drawn-like diagramming and wireframing.
+*   **📝 Markdown Viewer:** Real-time markdown rendering with GitHub Flavored Markdown (GFM) support and syntax highlighting.
+*   **🔐 Base64 Encoder / Decoder:** Quickly convert strings to and from Base64 format.
+*   **💾 SQL Formatter:** Beautify and format raw SQL queries instantly.
+*   **🛡️ CVSS Calculator:** Calculate Common Vulnerability Scoring System metrics.
+*   *And more being added constantly...*
 
-## Expanding the Oxlint configuration
+## 🛠️ Development & Tech Stack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+This project leverages modern frontend architecture:
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+*   [React 19](https://react.dev/) - Core framework
+*   [Vite](https://vitejs.dev/) - Lightning-fast build tool and dev server
+*   [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first styling
+*   [shadcn/ui](https://ui.shadcn.com/) - Accessible, customizable UI components
+*   [Zustand](https://zustand-demo.pmnd.rs/) - Lightweight state management
+*   [Excalidraw](https://excalidraw.com/) - Virtual whiteboard engine
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 📦 Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/tools.git
+   cd tools
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! If you have an idea for a new developer tool, feel free to open a PR. Please adhere to the established architectural patterns (register tools in `src/config/tools.ts`).
+
+## 📄 License
+
+This project is open-source and available under standard open-source terms.
