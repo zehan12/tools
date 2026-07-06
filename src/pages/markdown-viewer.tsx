@@ -3,6 +3,7 @@ import { ToolLayout } from "@/components/common/ToolLayout"
 import { usePersist } from "@/hooks/use-persist"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import rehypeRaw from "rehype-raw"
@@ -56,7 +57,7 @@ export default function MarkdownViewerTool() {
           </div>
           <div className="flex flex-col gap-2 h-full min-h-0">
             <Label>{t('tools.markdown-viewer.preview', "Preview")}</Label>
-            <div className="flex-1 overflow-auto bg-card border rounded-md p-4 lg:p-6 shadow-sm min-h-0">
+            <ScrollArea className="flex-1 bg-card border rounded-md p-4 lg:p-6 shadow-sm min-h-0">
               <article className="prose prose-sm sm:prose-base dark:prose-invert max-w-none">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
@@ -65,7 +66,7 @@ export default function MarkdownViewerTool() {
                   {input}
                 </ReactMarkdown>
               </article>
-            </div>
+            </ScrollArea>
           </div>
         </div>
       </div>
