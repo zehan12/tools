@@ -154,5 +154,13 @@ export const tools: ToolDef[] = [
     description: "Build a CVSS v3.1 vector by picking each metric, see the live base score and severity, and copy or share the result.",
     icon: "carbon:security",
     category: Category.Security,
+  },
+  {
+    slug: Tools.MarkdownViewer,
+    title: "Markdown Viewer",
+    component: lazy(() => import("@/pages/markdown-viewer")),
+    description: "Preview markdown with live rendering, syntax highlighting, and standard GitHub-flavored Markdown support.",
+    icon: "carbon:logo-github",
+    category: Category.Dev,
   }
 ];

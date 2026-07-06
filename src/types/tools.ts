@@ -30,6 +30,7 @@ export const Tools = {
   IndiaIncomeTax: "india-income-tax",
   BountyCalculator: "bounty-calculator",
   CvssCalculator: "cvss-calculator",
+  MarkdownViewer: "markdown-viewer",
 } as const;
 export type Tools = typeof Tools[keyof typeof Tools];
 
