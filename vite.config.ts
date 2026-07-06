@@ -15,7 +15,8 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] }),
     Sitemap({
       hostname: 'https://tools.zehan.com',
-      dynamicRoutes: Object.values(Tools).map(tool => `/${tool}`)
+      dynamicRoutes: Object.values(Tools).map(tool => `/${tool}`),
+      generateRobotsTxt: false
     }),
     VitePWA({
       registerType: 'autoUpdate',
