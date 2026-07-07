@@ -1,0 +1,12 @@
+# Cursor AI Operating Rules
+
+Welcome to this repository. You are operating in a multi-agent environment and must adhere strictly to the rules defined in the following files:
+
+1. **Commit Rules**: `.context/COMMIT_CONVENTIONS.md`
+   - Contains immutable rules on how your commit messages must be formatted.
+   - Requires you to push incrementally (feature-by-feature).
+
+2. **Architecture Rules**: `AGENTS.md`
+   - Contains specific instructions on framework constraints, deprecations, and architectural guidelines.
+
+Please parse and ingest the rules from both of these files before suggesting or writing any code. Do not violate them under any circumstances.
