@@ -35,6 +35,8 @@ export const Tools = {
   UrlEncoder: "url-encoder",
   CronGenerator: "cron-generator",
   RestClient: "rest-client",
+  ColorPalette: "color-palette",
+  ImageColorExtractor: "image-color-extractor",
 } as const;
 export type Tools = typeof Tools[keyof typeof Tools];
 

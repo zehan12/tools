@@ -194,5 +194,21 @@ export const tools: ToolDef[] = [
     description: "A lightweight, in-browser fetch tester for endpoints.",
     icon: "carbon:api",
     category: Category.Dev,
+  },
+  {
+    slug: Tools.ColorPalette,
+    title: "Color Palette Generator",
+    component: lazy(() => import("@/pages/color-palette")),
+    description: "Press spacebar to generate harmonious random color palettes instantly.",
+    icon: "carbon:color-palette",
+    category: Category.Dev,
+  },
+  {
+    slug: Tools.ImageColorExtractor,
+    title: "Image Color Extractor",
+    component: lazy(() => import("@/pages/image-color-extractor")),
+    description: "Extract dominant colors and a color palette from any image.",
+    icon: "carbon:image-search",
+    category: Category.Dev,
   }
 ];
