@@ -20,10 +20,10 @@ export function ToolLayout({ title, description, children, onClear, maxWidth = "
   const displayDescription = slug ? t(`tools.${slug}.description`, description) : description
 
   return (
-    <div className={`${maxWidth} flex flex-col grow gap-6 justify-between`}>
+    <div className={`${maxWidth} flex flex-col grow gap-6 justify-between min-h-0`}>
       <SEO title={displayTitle} description={displayDescription} />
-      <section className="space-y-6 grow flex flex-col">
-        <div>
+      <section className="space-y-6 grow flex flex-col min-h-0">
+        <div className="shrink-0">
           <h1 className="text-xl font-medium tracking-wider truncate">
             {displayTitle}
           </h1>

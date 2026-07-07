@@ -30,18 +30,18 @@ const syntaxHighlight = (jsonStr: string) => {
   if (jsonStr === "Error parsing response body" || jsonStr.startsWith("Network Error") || (!jsonStr.trim().startsWith("{") && !jsonStr.trim().startsWith("["))) {
     return <span className="text-foreground">{jsonStr}</span>;
   }
-  
+
   const regex = /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g;
-  
+
   const tokens = [];
   let lastIndex = 0;
-  
+
   let match;
   while ((match = regex.exec(jsonStr)) !== null) {
     if (match.index > lastIndex) {
       tokens.push(<span key={`text-${lastIndex}`} className="text-foreground">{jsonStr.substring(lastIndex, match.index)}</span>);
     }
-    
+
     let cls = "text-orange-500 dark:text-orange-400"; // number
     if (/^"/.test(match[0])) {
       if (/:$/.test(match[0])) {
@@ -54,15 +54,15 @@ const syntaxHighlight = (jsonStr: string) => {
     } else if (/null/.test(match[0])) {
       cls = "text-gray-500"; // null
     }
-    
+
     tokens.push(<span key={`token-${match.index}`} className={cls}>{match[0]}</span>);
     lastIndex = regex.lastIndex;
   }
-  
+
   if (lastIndex < jsonStr.length) {
     tokens.push(<span key={`text-${lastIndex}`} className="text-foreground">{jsonStr.substring(lastIndex)}</span>);
   }
-  
+
   return <>{tokens}</>;
 };
 
@@ -96,17 +96,17 @@ const KeyValueEditor = ({ items, onChange }: { items: KVParam[]; onChange: (item
             {item.enabled ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5" />}
           </div>
           <div className="flex-1">
-            <Input 
-              value={item.key} 
-              onChange={(e) => handleUpdate(item.id, 'key', e.target.value)} 
+            <Input
+              value={item.key}
+              onChange={(e) => handleUpdate(item.id, 'key', e.target.value)}
               placeholder="Key"
               className="h-7 bg-transparent border-0 shadow-none focus-visible:ring-0 text-xs px-2 font-mono"
             />
           </div>
           <div className="flex-1 border-l border-border/50">
-            <Input 
-              value={item.value} 
-              onChange={(e) => handleUpdate(item.id, 'value', e.target.value)} 
+            <Input
+              value={item.value}
+              onChange={(e) => handleUpdate(item.id, 'value', e.target.value)}
               placeholder="Value"
               className="h-7 bg-transparent border-0 shadow-none focus-visible:ring-0 text-xs px-3 font-mono"
             />
@@ -191,7 +191,7 @@ export default function RestClientTool() {
     headerParams.filter(p => p.enabled && p.key).forEach(p => {
       activeHeaders[p.key] = p.value
     })
-    
+
     if (authType === "bearer" && bearerToken) {
       activeHeaders["Authorization"] = `Bearer ${bearerToken}`
     }
@@ -202,9 +202,9 @@ export default function RestClientTool() {
       try {
         const urlObj = new URL(url.includes("://") ? url : `http://${url}`)
         activeParams.forEach(p => {
-           if (!urlObj.searchParams.has(p.key)) {
-             urlObj.searchParams.append(p.key, p.value)
-           }
+          if (!urlObj.searchParams.has(p.key)) {
+            urlObj.searchParams.append(p.key, p.value)
+          }
         })
         finalUrl = urlObj.toString()
       } catch (e) {
@@ -221,7 +221,7 @@ export default function RestClientTool() {
         method,
         headers: activeHeaders,
       }
-      
+
       if (method !== "GET" && method !== "HEAD" && bodyType !== "none") {
         if (bodyType === "text" && body.trim()) {
           fetchOptions.body = body
@@ -242,7 +242,7 @@ export default function RestClientTool() {
 
       let dataText = ""
       const contentType = res.headers.get("content-type") || ""
-      
+
       try {
         if (contentType.includes("application/json")) {
           const jsonObj = await res.json()
@@ -274,7 +274,7 @@ export default function RestClientTool() {
         data: dataText,
         headers: resHeaders,
       })
-      
+
       toast.success(`Request finished in ${Math.round(endTime - startTime)}ms`)
     } catch (err: any) {
       const endTime = performance.now()
@@ -294,17 +294,17 @@ export default function RestClientTool() {
   const [activeTab, setActiveTab] = useState<"Params" | "Headers" | "Auth" | "Body">("Body")
 
   return (
-    <ToolLayout 
-      title="HTTP / REST Client" 
+    <ToolLayout
+      title="HTTP / REST Client"
       description="A lightweight, in-browser tester for API endpoints."
       onClear={handleClear}
     >
       {/* Container matching screenshot */}
       <div className="flex flex-col grow rounded-lg overflow-hidden border bg-background text-foreground font-sans shadow-sm min-h-[600px] max-h-[80vh]">
-        
+
         {/* Top Bar */}
         <div className="flex items-center gap-2 p-3 bg-background border-b">
-          <div className="flex items-center flex-1 bg-muted rounded-md px-2 py-1 focus-within:ring-1 focus-within:ring-emerald-500/50 border border-transparent focus-within:border-emerald-500/30 transition-colors">
+          <div className="flex items-center flex-1 bg-muted rounded-md px-2 py-1 focus-within:ring-1 focus-within:ring-purple-400/50 border border-transparent focus-within:border-purple-400/30 transition-colors">
             <Select value={method} onValueChange={(val) => { if (val) setMethod(val) }}>
               <SelectTrigger className={`border-0 bg-transparent shadow-none px-2 focus:ring-0 h-8 w-fit ${METHOD_COLORS[method] || "text-emerald-500"} hover:bg-black/5 dark:hover:bg-white/5`}>
                 <SelectValue placeholder="Method" />
@@ -322,10 +322,10 @@ export default function RestClientTool() {
               className="flex-1 bg-transparent border-0 shadow-none focus-visible:ring-0 font-mono text-sm px-2 text-primary placeholder:text-muted-foreground"
             />
           </div>
-          <Button 
-            onClick={handleSend} 
-            disabled={isLoading} 
-            className="bg-emerald-500 hover:bg-emerald-600 text-white border-0 shadow-none h-9 px-6 rounded-md font-medium ml-2 transition-colors min-w-[120px]"
+          <Button
+            onClick={handleSend}
+            disabled={isLoading}
+            className="bg-[#91cb3e] hover:bg-[#7eac30]/80 text-white border-0 shadow-none h-9 px-6 rounded-md font-medium ml-2 transition-colors min-w-[120px]"
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
@@ -337,7 +337,7 @@ export default function RestClientTool() {
 
         {/* Panes */}
         <div className="flex flex-col xl:flex-row grow overflow-hidden">
-          
+
           {/* Left Pane */}
           <div className="flex flex-col w-full xl:w-1/2 border-r">
             {/* Tabs */}
@@ -346,18 +346,17 @@ export default function RestClientTool() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab as any)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-t-md transition-colors ${
-                    activeTab === tab 
-                      ? "text-foreground bg-background border-x border-t border-b-0 -mb-[1px]" 
-                      : "text-muted-foreground hover:text-foreground border border-transparent"
-                  }`}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-t-md transition-colors ${activeTab === tab
+                    ? "text-foreground bg-background border-x border-t border-b-0 -mb-[1px]"
+                    : "text-muted-foreground hover:text-foreground border border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
               ))}
               <div className="flex-1 border-b" />
             </div>
-            
+
             {/* Tab Content */}
             <ScrollArea className="flex-1 p-4 bg-background h-full">
               {activeTab === "Params" && (
@@ -383,10 +382,10 @@ export default function RestClientTool() {
                   {authType === "bearer" && (
                     <div className="flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
                       <Label className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Token</Label>
-                      <Input 
+                      <Input
                         value={bearerToken}
                         onChange={(e) => setBearerToken(e.target.value)}
-                        placeholder="Enter token..." 
+                        placeholder="Enter token..."
                         className="h-8 text-xs font-mono focus-visible:ring-emerald-500/50 bg-muted/20"
                       />
                     </div>
@@ -399,14 +398,14 @@ export default function RestClientTool() {
               )}
               {activeTab === "Body" && (
                 <div className="flex flex-col h-full relative">
-                  
+
                   {/* Postman-like Body Type Selector Row */}
                   <div className="flex flex-wrap items-center gap-4 text-xs mb-1">
                     <label className="flex items-center gap-1.5 cursor-pointer text-muted-foreground hover:text-foreground">
                       <input type="radio" name="bodyType" value="none" checked={method === "GET" || method === "HEAD" || bodyType === "none"} onChange={() => setBodyType("none")} disabled={method === "GET" || method === "HEAD"} className="w-3 h-3 text-blue-500 focus:ring-blue-500 bg-transparent border-muted-foreground/50 cursor-pointer" />
                       <span className={method === "GET" || method === "HEAD" || bodyType === "none" ? "text-foreground" : ""}>none</span>
                     </label>
-                    
+
                     <label className="flex items-center gap-1.5 cursor-not-allowed text-muted-foreground/50">
                       <input type="radio" disabled className="w-3 h-3 bg-transparent border-muted-foreground/30" />
                       <span>form-data</span>
@@ -460,7 +459,7 @@ export default function RestClientTool() {
                     </div>
                   ) : (
                     <div className="flex-1 flex border border-border/50 rounded-sm mt-2 relative group overflow-hidden bg-background max-h-[500px]">
-                      <div 
+                      <div
                         ref={lineNumbersRef}
                         className="flex flex-col text-muted-foreground/50 select-none text-right border-r border-border/50 pr-2 pt-2 pb-12 bg-muted/10 font-mono text-[13px] w-[35px] h-full leading-[20px] overflow-hidden"
                       >
@@ -494,12 +493,12 @@ export default function RestClientTool() {
               </button>
               <button className="px-3 py-1.5 text-xs font-medium text-foreground bg-background border-x border-t rounded-t-md transition-colors -mb-[1px]">
                 Response {response ? <span className={
-                  response.status >= 200 && response.status < 300 ? 'text-emerald-500' : 
-                  response.status === 0 ? 'text-destructive' : 'text-amber-500'
+                  response.status >= 200 && response.status < 300 ? 'text-emerald-500' :
+                    response.status === 0 ? 'text-destructive' : 'text-amber-500'
                 }>{response.status} {response.statusText}</span> : ""}
               </button>
             </div>
-            
+
             {/* Content */}
             <div className="flex-1 flex flex-col min-h-0 relative">
               <ScrollArea className="flex-1 p-4 bg-background h-full">
@@ -511,16 +510,15 @@ export default function RestClientTool() {
                   </div>
                 ) : response ? (
                   <div className="flex flex-col gap-4">
-                    <div 
+                    <div
                       className="text-xs font-mono text-muted-foreground flex items-center gap-2 cursor-pointer hover:text-foreground transition-colors"
                       onClick={() => setShowHeaders(!showHeaders)}
                     >
                       <span className="text-muted-foreground">{showHeaders ? <ChevronDown className="w-3 h-3" /> : <ChevronRight className="w-3 h-3" />}</span>
-                      HTTP/1.1 
-                      <span className={`font-bold ${
-                        response.status >= 200 && response.status < 300 ? 'text-emerald-500' : 
+                      HTTP/1.1
+                      <span className={`font-bold ${response.status >= 200 && response.status < 300 ? 'text-emerald-500' :
                         response.status === 0 ? 'text-destructive' : 'text-amber-500'
-                      }`}>
+                        }`}>
                         {response.status || "ERR"} {response.statusText}
                       </span>
                       <span>({Object.keys(response.headers).length} headers)</span>
@@ -541,7 +539,7 @@ export default function RestClientTool() {
                         </table>
                       </div>
                     )}
-                    
+
                     {/* Fake Line Numbers + Code Block */}
                     <ScrollArea className="mt-2 w-full pb-4">
                       <div className="flex font-mono text-xs w-max min-w-full relative">
@@ -562,24 +560,24 @@ export default function RestClientTool() {
                   </div>
                 )}
               </ScrollArea>
-              
+
               {response && (
-                 <div className="border-t border-border/50 bg-muted/10 p-1.5 px-4 flex justify-between items-center text-xs font-mono text-muted-foreground shrink-0 relative">
-                    <span>{response.data.trim().startsWith('{') || response.data.trim().startsWith('[') ? 'JSON' : 'TEXT'} | {new Blob([response.data]).size} B | {response.timeMs} ms</span>
-                    <button onClick={() => setShowOptions(!showOptions)} className="hover:bg-muted p-1 rounded text-foreground">
-                      <MoreHorizontal className="w-4 h-4" />
-                    </button>
-                    {showOptions && (
-                      <div className="absolute right-4 bottom-10 bg-popover border border-border shadow-lg rounded-md flex flex-col py-1 w-40 z-50 text-popover-foreground">
-                        <button className="text-left px-3 py-1.5 hover:bg-muted text-xs" onClick={() => { navigator.clipboard.writeText(JSON.stringify(response)); toast.success("Copied all"); setShowOptions(false) }}>Copy all</button>
-                        <button className="text-left px-3 py-1.5 hover:bg-muted text-xs" onClick={() => { navigator.clipboard.writeText(JSON.stringify(response.headers, null, 2)); toast.success("Copied headers"); setShowOptions(false) }}>Copy headers</button>
-                        <button className="text-left px-3 py-1.5 hover:bg-muted text-xs" onClick={() => { navigator.clipboard.writeText(response.data); toast.success("Copied body"); setShowOptions(false) }}>Copy body</button>
-                        <div className="h-[1px] bg-border my-1" />
-                        <button className="text-left px-3 py-1.5 hover:bg-muted text-xs text-destructive" onClick={() => { setResponse(null); setShowOptions(false) }}>Clear</button>
-                      </div>
-                    )}
-                 </div>
-               )}
+                <div className="border-t border-border/50 bg-muted/10 p-1.5 px-4 flex justify-between items-center text-xs font-mono text-muted-foreground shrink-0 relative">
+                  <span>{response.data.trim().startsWith('{') || response.data.trim().startsWith('[') ? 'JSON' : 'TEXT'} | {new Blob([response.data]).size} B | {response.timeMs} ms</span>
+                  <button onClick={() => setShowOptions(!showOptions)} className="hover:bg-muted p-1 rounded text-foreground">
+                    <MoreHorizontal className="w-4 h-4" />
+                  </button>
+                  {showOptions && (
+                    <div className="absolute right-4 bottom-10 bg-popover border border-border shadow-lg rounded-md flex flex-col py-1 w-40 z-50 text-popover-foreground">
+                      <button className="text-left px-3 py-1.5 hover:bg-muted text-xs" onClick={() => { navigator.clipboard.writeText(JSON.stringify(response)); toast.success("Copied all"); setShowOptions(false) }}>Copy all</button>
+                      <button className="text-left px-3 py-1.5 hover:bg-muted text-xs" onClick={() => { navigator.clipboard.writeText(JSON.stringify(response.headers, null, 2)); toast.success("Copied headers"); setShowOptions(false) }}>Copy headers</button>
+                      <button className="text-left px-3 py-1.5 hover:bg-muted text-xs" onClick={() => { navigator.clipboard.writeText(response.data); toast.success("Copied body"); setShowOptions(false) }}>Copy body</button>
+                      <div className="h-[1px] bg-border my-1" />
+                      <button className="text-left px-3 py-1.5 hover:bg-muted text-xs text-destructive" onClick={() => { setResponse(null); setShowOptions(false) }}>Clear</button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
